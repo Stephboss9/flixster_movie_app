@@ -1,1 +1,139 @@
+* {
+    padding: 0;
+    margin: 0;
+    border-width: 0;
+}
 
+:root {
+    --bs: 0.25em 0.25em 0.75em rgba(0,0,0,0.25), /*box-shadow settings*/
+    0.125em 0.125em 0.25em rgba(0,0,0,.15)
+}
+
+/*body styling*/
+body {
+  color:  rgb(248, 71, 95);
+  background-color: #333;
+  font-family: 'Fredoka One', cursive;
+}
+
+/*nav_bar styling*/
+#nav_bar {
+    background: rgb(26, 26, 26);
+}
+
+#intro_section{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+#logo, #Title {
+    padding: 10px;
+    align-items: center;
+}
+
+/*Movie Title styling*/
+#Title, .now_playing_header{
+    font-family: 'Bebas Neue', cursive;
+}
+
+#Title {
+    font-size: 3em;
+}
+
+.now_playing_header {
+    font-size: 3em;
+    margin-bottom: 30px;
+    margin-top: 50px;
+    margin-left: 70px;
+    color: rgb(252, 254, 255);
+
+}
+
+#search_bar {
+    text-align: center;
+}
+#Mname {
+    color: black;
+    border-radius: 20px;
+    text-align: center;
+    margin-top: 30px;
+    padding: 10px;
+}
+
+
+/*logo styling*/
+#logo {
+ width: 150px;
+ height: 70px;
+}
+
+
+#movie_section {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    font-size: x-large;
+    font-family: 'Staatliches', cursive;
+}
+
+.movie_poster {
+    flex: 0 1 20%;
+    text-align: center;
+    color: rgb(252, 254, 255);
+    margin-bottom: 40px;
+    
+}
+.movie_poster_img {
+    border: 1px solid #333;
+    transition: transform 400ms ease-in-out;
+    box-shadow: var(--bs);
+    border-radius: 20px;
+    margin-bottom: 10px;
+
+}
+
+.movie_poster_img:hover {
+    border: 1px solid white;
+    transform: scale(1.07);
+}
+
+.hidden {
+    display: none;
+}
+
+/*rating logo start styling*/
+.rating_icon {
+    background: #333;
+    width: 20px;
+    height: 20px;
+}
+
+.button {
+    text-align: center;
+}
+/*load more button styling*/
+.show_more_btn {
+    border: 2px solid black;
+    background-color: white;
+    color: black;
+    border-radius: 20px;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 200ms ease-in-out; 
+    font-family: 'Fredoka One', cursive;
+
+}
+
+.success {
+    background-color: rgb(39, 39, 39);
+    color: white;
+}
+
+.success:hover {
+    background-color: rgb(245, 38, 65);
+    color: white;
+    transform: scale(1.2);
+}
