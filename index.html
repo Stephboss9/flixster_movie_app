@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fredoka+One&family=Limelight&family=Staatliches&display=swap" 
-    rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fredoka+One&family=Kanit:wght@200&family=Limelight&family=Staatliches&display=swap" rel="stylesheet">    
     <link rel = "stylesheet" href= "style.css">
     <title>Flixster</title>
 </head>
@@ -18,19 +17,36 @@
     </nav>
 
     <form id = "search_bar">
-        <input type = "text" placeholder= "Type a movie" id = "Mname" name = "Mname">
-        <button type="text" id = "search_button">submit</button>
+        <div class = "container_search">
+            <img  src = "clear_icon.jpg" class = "clear_icon hidden"> 
+            <input type = "text" placeholder= "Type a movie" id = "Mname" name = "Mname">
+            <button id = "search_button" ><img src="search_icon.png"></button>
+        </div>
     </form>
 
+    
 
     <div class = "now_playing_section"><h2 class = "now_playing_header">Now Playing</h2></div>
     
+    <div class = "modal_cotainer">
+        <div class = "movie_info_modal hidden">
+            <div class = "close"> <button class = "close_btn" onclick = closePopUpArea()> close</button></div>
+
+            <div class = "movie_modal_content"> 
+            </div>
+        </div> 
+    </div>    
+      
+   
+    
     <div id = "movie_section">
-        
+    
     </div>
-
-    <div class = "button hidden" ><button class = "show_more_btn success" onclick = "showMore()" class = "hidden">Show More</button></div>
-
+    <div class = "container_btn">
+        <div class = "button hidden" ><button class = "show_more_btn success" onclick = "showMore()" class = "hidden">Show More</button></div>
+    <div class = "back_up"><a class = "button_link back_up_btn hidden success" href = "#intro_section">Back Up</a></div>
+    </div>
+    
     <script src = "script.js"></script>
 </body>
 </html>

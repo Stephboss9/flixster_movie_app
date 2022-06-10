@@ -5,11 +5,20 @@ const movieInputField = document.querySelector("#Mname")
 const movieForm = document.querySelector("#search_bar")
 const imageLink = "https://image.tmdb.org/t/p/w780"
 const searchBtnElem = document.querySelector('#search_button')
-
+const upToTopBtn = document.querySelector('.back_up_btn')
 const api_key = "d475181c2b1a55789d8ab274062dbc3b"
+const movieSectionElem = document.querySelector('#movie_section')
+const bodyElem = document.querySelector('body')
+const wholeDoc = document.querySelector('html')
+const clearElem = document.querySelector('.clear_icon')
+const closeBtn = document.querySelector('.close_btn')
+const popUp = document.querySelector('.movie_info_modal')
 
 //other variables
-let page = 1
+let nowPlayingPage = 1
+let prevNowPlayingPage = 0
+let searchPage = 1
+let prevPage = 1
 let movieTitle = ""
 let vote = 0
 let playingApiUrl = `https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}&language=en-US&page=`
@@ -17,20 +26,54 @@ let searchApiUrl = ''
 let searchMoreFromInput = false
 let searchTerm = ""
 
+getResults(playingApiUrl, nowPlayingPage)
+
 movieForm.addEventListener('submit', (event) => {
-    page = 1
+    //reset search page
+    searchPage = 1
     event.preventDefault()
     searchMoreFromInput = true
+    /*get search term*/
     searchTerm = movieForm['Mname'].value
     console.log(searchTerm)
+    if (searchTerm === ''){
+        searchMoreFromInput = false
+
+        for(let i = 1; i <= nowPlayingPage;i++){
+            getResults(playingApiUrl, i)
+        }
+    }
+    
     movieDisplay.innerHTML = ``
     searchApiUrl = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&language=en-US&include_adult=false&query=${searchTerm}&page=`
-    getResults(searchApiUrl)})
+    getResults(searchApiUrl, searchPage)})
 
-async function getResults(url){
-    console.log(url)
 
-    let response = await fetch(url+page)
+/*takes care of clearing search results */
+    movieInputField.addEventListener('click', () => {
+        /*show the clear button icon */
+    clearElem.classList.remove('hidden')
+    /**when user clicks clear button, clear input field and show previous now playing movies */
+    })
+    clearElem.addEventListener('click', ()=> {
+        /*go back to page 1 of the now playing page*/ 
+    /** set the search term to empty*/
+    movieForm['Mname'].value = ''
+    /**hide the clear element button */
+    clearElem.classList.add('hidden')
+    movieDisplay.innerHTML = ``
+    searchMoreFromInput = false
+    
+    /**display previous movies that were displayed */
+    for(let i = 1; i <= nowPlayingPage;i++){
+        getResults(playingApiUrl, i)
+    }
+    })
+    
+
+async function getResults(url, currentPage){
+
+    let response = await fetch(url+currentPage)
    
     let responseData = await response.json()
     console.log(responseData)
@@ -40,39 +83,82 @@ async function getResults(url){
 
 function displayResults(movies) {
   
-    movies.results.forEach(movie => {
-        let movieImageSize = 'w342'
-     
+    movies.results.map(movie => {     
         movieDisplay.innerHTML += `
-        <div class = "movie_poster"> 
+        <div class = "movie_poster" onclick = "generateMovieInfo(${movie.id})"> 
         <img class = "movie_poster_img" src = "https://image.tmdb.org/t/p/w342${movie.poster_path}"> 
         <p class = "rating"><img class = "rating_icon" src = "star_icon.png"> ${movie.vote_average}</p>
         <p class = "movie_title">${movie.title}<p>
         </div>`
     });
+    
     showMoreBtn.classList.remove('hidden')
- 
+    upToTopBtn.classList.remove('hidden')
 }
 
-function handleFormSub(evt, url) {
-    showMoreBtn.classList.add('hidden')
-    getResults(evt, url)
-}
+
 
 function loadMoreMovies(){
-    page+=1
     if (searchMoreFromInput === true){
-        getResults(searchApiUrl)
+        searchPage += 1
+        getResults(searchApiUrl, searchPage)
     } else {
-        getResults(playingApiUrl)
+        nowPlayingPage += 1
+        getResults(playingApiUrl, nowPlayingPage)
     }
 
 }
 
+/*generates more info about each movie*/ 
+async function generateMovieInfo(movieId) {
+    let movieInfo = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${api_key}&language=en-US`
+    /**get info about the movie */
+    let response = await fetch(movieInfo)
+    let info = await response.json()
+    console.log(info)
+    const movieInfoSection = document.querySelector('.movie_modal_content')
+    /**show popup */
+    popUp.classList.remove('hidden')
+    //update popup with info about the movie
+   
+        movieInfoSection.innerHTML += 
+        `
+        <div class = "info_container">
+        <div class = "movie_backdrop">
+            <img class = "backdrop_img" src = "https://image.tmdb.org/t/p/w780${info.backdrop_path}"
+        </div>
+        <p><h1 class = "movie_title">${info.title}</h1></p>
+        <div class = "side_info">${info.runtime} min | ${info.release_date} | ${info.original_language} | ${info.vote_average}</div>
+        <div class = "movie_overview"> ${info.overview}</div>
+        </div>
+        `
+  
+}
+// closes the pop up area
+
+function closePopUpArea() {
+    const movieInfoSection = document.querySelector('.movie_modal_content')
+    movieInfoSection.innerHTML = ''
+    popUp.classList.add('hidden')
+}
+
 window.onload = function () {
     showMoreBtn.addEventListener('click', () => { loadMoreMovies()})
-    getResults(playingApiUrl)
+    /*
+        setTimeout(() => {const imageElems = document.querySelectorAll('.movie_poster')
+        imageElems.forEach(image => 
+            image.addEventListener('click', () => {
+            movieSectionElem.classList.add('low_opacity')    
+            image.classList.add('low_opacity')
+            image.innerHTML = '<div class="movie_description" >hey</div>'
+    }))}, 100)
+
+*/
+  
+    console.log("hey")
 }
+
+    
 
 
 
