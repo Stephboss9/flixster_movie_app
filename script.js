@@ -85,7 +85,7 @@ function displayResults(movies) {
   
     movies.results.map(movie => {     
         movieDisplay.innerHTML += `
-        <div class = "movie_poster" onclick = "generateMovieInfo(${movie.id})"> 
+        <div class = "movie_poster reveal" onclick = "generateMovieInfo(${movie.id})"> 
         <img class = "movie_poster_img" src = "https://image.tmdb.org/t/p/w342${movie.poster_path}"> 
         <p class = "rating"><img class = "rating_icon" src = "star_icon.png"> ${movie.vote_average}</p>
         <p class = "movie_title">${movie.title}<p>
@@ -128,7 +128,7 @@ async function generateMovieInfo(movieId) {
             <img class = "backdrop_img" src = "https://image.tmdb.org/t/p/w780${info.backdrop_path}"
         </div>
         <p><h1 class = "movie_title">${info.title}</h1></p>
-        <div class = "side_info">${info.runtime} min | ${info.release_date} | ${info.original_language} | ${info.vote_average}</div>
+        <div class = "side_info">${info.runtime} min | ${info.release_date} | ${info.original_language} | <img class = "rating_icon" src = "star_icon.png"> ${info.vote_average}</div>
         <div class = "movie_overview"> ${info.overview}</div>
         </div>
         `
@@ -154,6 +154,27 @@ window.onload = function () {
     }))}, 100)
 
 */
+
+window.addEventListener('scroll', reveal);
+
+function reveal() {
+    var reveals = document.querySelectorAll('.reveal');
+
+
+    for(var i = 0; i < reveals.length; i++){
+
+        var windowheight = window.innerHeight;
+        var revealtop = reveals[i].getBoundingClientRect().top;
+        var revealpoint = 150;
+
+        if(revealtop < windowheight - revealpoint) {
+            reveals[i].classList.add('active');
+        }
+        else {
+            reveals[i].classList.remove('active');
+        }
+    }
+}
   
     console.log("hey")
 }

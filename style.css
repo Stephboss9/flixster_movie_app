@@ -265,3 +265,15 @@ body {
     cursor: pointer;
     font-family: 'Fredoka One', cursive;
   }
+
+  .reveal {
+    position: relative;
+    transform: translateY(150px);
+    transition: all 2s ease;
+    opacity: 0;
+}
+
+.reveal.active{
+    transform: translateY(0px);
+    opacity:1;
+}
