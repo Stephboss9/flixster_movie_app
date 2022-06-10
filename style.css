@@ -25,14 +25,16 @@ body {
 
 #intro_section{
     display: flex;
-    justify-content: flex-start;
+    margin-right: 70px;
     flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
 }
 
+
+
 #logo, #Title {
     padding: 10px;
-    align-items: center;
 }
 
 /*Intro Section Styling*/
