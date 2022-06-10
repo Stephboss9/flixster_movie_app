@@ -252,13 +252,11 @@ body {
   .backdrop_img {
     object-fit: cover;
     box-shadow: var(--bs);
-    width: 100%;
+    width: 80%;
     margin: 0 auto;
   }
 
-  .backdrop_img {
-    width: 50%;
-  }
+ 
 
   .side_info, .movie_overview {
     line-height: 1.3em;

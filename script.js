@@ -35,7 +35,6 @@ movieForm.addEventListener('submit', (event) => {
     searchMoreFromInput = true
     /*get search term*/
     searchTerm = movieForm['Mname'].value
-    console.log(searchTerm)
     if (searchTerm === ''){
         searchMoreFromInput = false
 
@@ -76,7 +75,6 @@ async function getResults(url, currentPage){
     let response = await fetch(url+currentPage)
    
     let responseData = await response.json()
-    console.log(responseData)
 
     displayResults(responseData)
 }
@@ -111,20 +109,27 @@ function loadMoreMovies(){
 
 /*generates more info about each movie*/ 
 async function generateMovieInfo(movieId) {
+    //api url for movie info, and movie videos
     let movieInfo = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${api_key}&language=en-US`
+    let movieVideo = `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${api_key}&language=en-US`
+    //make api call for videos and info
+    let videoRequest = await fetch(movieVideo)
+    let videoData = await videoRequest.json()
+    console.log(videoData.results[0].key)
+
     /**get info about the movie */
     let response = await fetch(movieInfo)
     let info = await response.json()
-    console.log(info)
     const movieInfoSection = document.querySelector('.movie_modal_content')
     /**show popup */
     popUp.classList.remove('hidden')
     //update popup with info about the movie
-   
+   // <iframe width="560" height="315" src="https://www.youtube.com/embed/FuiMQPc5aKA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
         movieInfoSection.innerHTML += 
         `
         <div class = "movie_backdrop">
-            <img class = "backdrop_img" alt = "movie backdrop image" src = "https://image.tmdb.org/t/p/w780${info.backdrop_path}"
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/${videoData.results[0].key}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <p><h1 class = "movie_title">${info.title}</h1></p>
         <div class = "side_info">${info.runtime} min | ${info.release_date} | ${info.original_language} | <img class = "rating_icon" src = "star_icon.png"> ${info.vote_average}</div>
@@ -173,9 +178,7 @@ function reveal() {
         }
     }
 }
-  
-    console.log("hey")
-}
+  }
 
     
 
