@@ -59,22 +59,25 @@ body {
     align-items: center;
 }
 
-#search_bar {
+#search_area{
     text-align: center;
     font-size: 16px; 
+    width: 500px;
+    margin: 0 auto;
+    position: relative;
 }
 
 #search_button {
     background-color: #333;
     cursor: pointer;
-    margin:0 20px;
     margin-top: 26px;
 }
 
 #search_button img {
     width: 40px;
     height: 40px;
- 
+    margin-top: 18px;
+    margin-left: 10px;
 }
 
 .clear_icon {
@@ -83,7 +86,7 @@ body {
     width: 30px;
     color: black;
     height: 30px;
-    margin-top: 30px;
+    margin-top: 38px;
     margin-right: 10px;
 }
 
@@ -91,8 +94,16 @@ body {
     color: black;
     border-radius: 20px;
     text-align: center;
-    margin-top: 30px;
+    margin-top: 40px;
+    width: 100%;
     padding: 10px;
+    border: 3px solid rgb(0, 0, 0);
+    background: rgb(156, 152, 152);
+}
+
+#Mname:hover {
+    border: 3px solid rgb(245, 38, 65);
+
 }
 
 
@@ -186,6 +197,7 @@ body {
 
 /*modal styling*/
 
+
 .movie_info_modal {
     position: fixed;
     z-index: 1;
@@ -200,12 +212,17 @@ body {
 }
 
 .movie_modal_content{
+    width: 60%;
+    text-align: center;
+    margin: auto;
+    font-family: 'Kanit', sans-serif;
+    text-align: center;
     position: relative ;
     background-color: #252323;
     margin: auto;
     padding: 180px 80px;
     border: 1px solid #888;
-    width: 80%;
+    width: 60%;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
@@ -230,18 +247,17 @@ body {
     color: white;
   }
 
-  .info_container {
-    width: 60%;
-    text-align: center;
-    margin: auto;
-    display: flex;
-    flex-wrap: wrap;
-    font-family: 'Kanit', sans-serif;
-
+ 
+/*back drop image styling*/
+  .backdrop_img {
+    object-fit: cover;
+    box-shadow: var(--bs);
+    width: 100%;
+    margin: 0 auto;
   }
 
   .backdrop_img {
-    box-shadow: var(--bs);
+    width: 50%;
   }
 
   .side_info, .movie_overview {

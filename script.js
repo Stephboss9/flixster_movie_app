@@ -2,7 +2,7 @@
 const movieDisplay = document.querySelector("#movie_section")
 const showMoreBtn = document.querySelector(".button")
 const movieInputField = document.querySelector("#Mname")
-const movieForm = document.querySelector("#search_bar")
+const movieForm = document.querySelector("#search_area")
 const imageLink = "https://image.tmdb.org/t/p/w780"
 const searchBtnElem = document.querySelector('#search_button')
 const upToTopBtn = document.querySelector('.back_up_btn')
@@ -86,7 +86,7 @@ function displayResults(movies) {
     movies.results.map(movie => {     
         movieDisplay.innerHTML += `
         <div class = "movie_poster reveal" onclick = "generateMovieInfo(${movie.id})"> 
-        <img class = "movie_poster_img" src = "https://image.tmdb.org/t/p/w342${movie.poster_path}"> 
+        <img class = "movie_poster_img" alt = "movie poster image" src = "https://image.tmdb.org/t/p/w342${movie.poster_path}"> 
         <p class = "rating"><img class = "rating_icon" src = "star_icon.png"> ${movie.vote_average}</p>
         <p class = "movie_title">${movie.title}<p>
         </div>`
@@ -123,14 +123,12 @@ async function generateMovieInfo(movieId) {
    
         movieInfoSection.innerHTML += 
         `
-        <div class = "info_container">
         <div class = "movie_backdrop">
-            <img class = "backdrop_img" src = "https://image.tmdb.org/t/p/w780${info.backdrop_path}"
+            <img class = "backdrop_img" alt = "movie backdrop image" src = "https://image.tmdb.org/t/p/w780${info.backdrop_path}"
         </div>
         <p><h1 class = "movie_title">${info.title}</h1></p>
         <div class = "side_info">${info.runtime} min | ${info.release_date} | ${info.original_language} | <img class = "rating_icon" src = "star_icon.png"> ${info.vote_average}</div>
         <div class = "movie_overview"> ${info.overview}</div>
-        </div>
         `
   
 }
