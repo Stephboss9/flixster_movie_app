@@ -128,8 +128,8 @@ async function generateMovieInfo(movieId) {
 
         movieInfoSection.innerHTML += 
         `
-        <div class = "movie_backdrop">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/${videoData.results[0].key}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class = "movie_trailer">
+            <iframe class = "video" width="600" height="390" src="https://www.youtube.com/embed/${videoData.results[0].key}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <p><h1 class = "movie_title">${info.title}</h1></p>
         <div class = "side_info">${info.runtime} min | ${info.release_date} | ${info.original_language} | <img class = "rating_icon" src = "star_icon.png"> ${info.vote_average}</div>

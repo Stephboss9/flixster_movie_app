@@ -249,16 +249,20 @@ body {
     color: white;
   }
 
+  
+
  
 /*back drop image styling*/
-  .backdrop_img {
+  .movie_trailer {
     object-fit: cover;
-    box-shadow: var(--bs);
-    width: 80%;
+    display: block;
+    width: 100%;
     margin: 0 auto;
   }
 
- 
+ .video {
+    width: 50%;
+ }
 
   .side_info, .movie_overview {
     line-height: 1.3em;
