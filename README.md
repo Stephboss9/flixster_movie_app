@@ -37,7 +37,7 @@ Deployed Application (optional): [Flixster Deployed Site](ADD_LINK_HERE)
 - [x] Deploy website using GitHub Pages. 
 - [x] Allow user to view more details about a movie within a popup.
 - [x] Improve the user experience through CSS & animation.
-- [ ] Allow movie video trailers to be played using [embedded YouTube](https://support.google.com/youtube/answer/171780?hl=en)
+- [x] Allow movie video trailers to be played using [embedded YouTube](https://support.google.com/youtube/answer/171780?hl=en)
 - [x] Implement anything else that you can get done to improve the app functionality!
 
 ### Walkthrough Video
@@ -49,16 +49,23 @@ Deployed Application (optional): [Flixster Deployed Site](ADD_LINK_HERE)
 ### Reflection
 
 * Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
-      The third lab played a significant part in completition of this project. Completing the third lab taught me how to access an api, generate an api key, make api calls, and handle json data, and that was a big part of this project. The 2nd lab also taught me how to add html to the DOM through javascript, which helped me in this project when displaying different movies on the screen. The second lab also introduced event listeners which were very important for this project. For example, if the uiser wanted to search for a movie, I added an event listener to the form element in my html, where the event was a 'submit' and the call back function displayed movies related to the users earch term.
+      The third lab played a significant part in completition of this project. Completing the third lab taught me how to access an api, generate an api key, make api calls, and handle json data, and that was a big part of this project. The 2nd lab also taught me how to add html to the DOM through javascript, which helped me in this project when displaying different movies on the screen. The second lab also introduced event listeners which were very important for this project. For example, if the user wanted to search for a movie, I added an event listener to the form element in my html, where the event was a 'submit' and the call back function displayed movies related to the users earch term. A feature I felt unpreapred to complete initially, was the pop up feature that would display a modal for any movie that was clicked.
+However with the help of me peers, I figured it out.
 
 * If you had more time, what would you have done differently? Would you have added additional features? Changed the way your project responded to a particular event, etc.
-      If I had more time on this project I feature I would have added, that one of my peers implemented, was a light and dark mode for their website. 
+      If I had more time on this project I feature I would have added, that one of my peers implemented, was a light and dark mode for their website. I would have also 
+      added more animations to my website for user experience. An cool animation I would added is so that every time the search bar is clicked, it expands. Overall
+      I am satisfied with my final product. 
+      
   
 Add your response here
 
 * Reflect on your project demo, what went well? Were there things that maybe didn't go as planned? Did you notice something that your peer did that you would like to try next time?
+    
+    During my demo, I was able to demonstrate that my website supported all the core features required, as well as some of the stretch features which included adding 
+    a popup for each movie, displying more information about each movie, some extra styling, and animations. One feature that really got my attention, was a feature 
+    my peer implemented where you could search movies by genre. I thought that was really cool and something I want to try implementing in the future.
 
-Add your response here
 
 ### Open-source libraries used
 
@@ -67,3 +74,5 @@ Add your response here
 ### Shout out
 
 Give a shout out to somebody from your cohort that especially helped you during your project. This can be a fellow peer, instructor, TA, mentor, etc.
+I would like to shoutout Roy, he helped me a lot in every area of developing my website including, logic and styling. He also reminded me how useful the chrome debugger tools are. Shout out to Angelo, we partnered up the first day of developing our project, helped each other out while getting to know each other and
+accomplished a great amount. Also shout out to Amantina she recomended to me a very useful source for implementing the pop up feature. 
