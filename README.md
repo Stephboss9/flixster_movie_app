@@ -53,12 +53,12 @@ style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
 ### Reflection
 
 * Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
-      The third lab played a significant part in completition of this project. Completing the third lab taught me how to access an api, generate an api key, make api calls, and handle json data, and that was a big part of this project. The 2nd lab also taught me how to add html to the DOM through javascript, which helped me in this project when displaying different movies on the screen. The second lab also introduced event listeners which were very important for this project. For example, if the user wanted to search for a movie, I added an event listener to the form element in my html, where the event was a 'submit' and the call back function displayed movies related to the users earch term. A feature I felt unpreapred to complete initially, was the pop up feature that would display a modal for any movie that was clicked.
+      The third lab played a significant part in completition of this project. Completing the third lab taught me how to access an api, generate an api key, make api calls, and handle json data, and that was a big part of this project. The 2nd lab also taught me how to add html to the DOM through javascript, which helped me in this project when displaying different movies on the screen. The second lab also introduced event listeners which were very important for this project. For example, if the user wanted to search for a movie, I added an event listener to the form element in my html, where the event was a 'submit' and the call back function displayed movies related to the users earch term. A feature I felt unprepared to complete initially was the pop up feature that would display a modal for any movie that was clicked.
 However with the help of me peers, I figured it out.
 
 * If you had more time, what would you have done differently? Would you have added additional features? Changed the way your project responded to a particular event, etc.
-      If I had more time on this project I feature I would have added, that one of my peers implemented, was a light and dark mode for their website. I would have also 
-      added more animations to my website for user experience. An cool animation I would added is so that every time the search bar is clicked, it expands. Overall
+      If I had more time on this project afeature I would have added, that one of my peers implemented is a light and dark mode for their website. I would have also 
+      added more animations to my website for user experience. A cool animation I would added is so that every time the search bar is clicked, it expands. Overall
       I am satisfied with my final product. 
       
   
