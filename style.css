@@ -82,7 +82,7 @@ body {
     margin-left: 10px;
 }
 
-.clear_icon {
+.close-search-btn {
     background-color: #333;
     cursor: pointer;
     width: 30px;
@@ -92,7 +92,7 @@ body {
     margin-right: 10px;
 }
 
-#Mname {
+#search-input{
     color: black;
     border-radius: 20px;
     text-align: center;
@@ -103,7 +103,7 @@ body {
     background: rgb(156, 152, 152);
 }
 
-#Mname:hover {
+#search-input {
     border: 3px solid rgb(245, 38, 65);
 
 }
@@ -116,7 +116,7 @@ body {
 }
 
 /*Movie Section Styling*/
-#movie_section {
+#movie-grid {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -124,14 +124,14 @@ body {
     font-family: 'Staatliches', cursive;
 }
 
-.movie_poster {
+.movie-card {
     flex: 0 1 20%;
     text-align: center;
     color: rgb(252, 254, 255);
     margin-bottom: 40px;
     
 }
-.movie_poster_img {
+.movie-poster {
     border: 1px solid #333;
     transition: transform 400ms ease-in-out;
     box-shadow: var(--bs);
@@ -139,7 +139,7 @@ body {
 
 }
 
-.movie_poster_img:hover {
+.movie-poster:hover {
     border: 1px solid white;
     transform: scale(1.07);
 }
@@ -172,7 +172,7 @@ body {
 
 
 /*load more button styling*/
-.show_more_btn, .back_up_btn {
+.load-more-movies-btn, .back_up_btn {
     border: 2px solid black;
     background-color: white;
     color: black;

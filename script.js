@@ -1,16 +1,16 @@
 //global selectors
-const movieDisplay = document.querySelector("#movie_section")
+const movieDisplay = document.querySelector("#movie-grid")
 const showMoreBtn = document.querySelector(".button")
-const movieInputField = document.querySelector("#Mname")
+const movieInputField = document.querySelector("#search-input")
 const movieForm = document.querySelector("#search_area")
 const imageLink = "https://image.tmdb.org/t/p/w780"
 const searchBtnElem = document.querySelector('#search_button')
 const upToTopBtn = document.querySelector('.back_up_btn')
 const api_key = "d475181c2b1a55789d8ab274062dbc3b"
-const movieSectionElem = document.querySelector('#movie_section')
+const movieSectionElem = document.querySelector('#movie-grid')
 const bodyElem = document.querySelector('body')
 const wholeDoc = document.querySelector('html')
-const clearElem = document.querySelector('.clear_icon')
+const clearElem = document.querySelector('.close-search-btn')
 const closeBtn = document.querySelector('.close_btn')
 const popUp = document.querySelector('.movie_info_modal')
 
@@ -34,7 +34,7 @@ movieForm.addEventListener('submit', (event) => {
     event.preventDefault()
     searchMoreFromInput = true
     /*get search term*/
-    searchTerm = movieForm['Mname'].value
+    searchTerm = movieForm['search-input'].value
     if (searchTerm === ''){
         searchMoreFromInput = false
 
@@ -57,7 +57,7 @@ movieForm.addEventListener('submit', (event) => {
     clearElem.addEventListener('click', ()=> {
         /*go back to page 1 of the now playing page*/ 
     /** set the search term to empty*/
-    movieForm['Mname'].value = ''
+    movieForm['search-input'].value = ''
     /**hide the clear element button */
     clearElem.classList.add('hidden')
     movieDisplay.innerHTML = ``
@@ -83,8 +83,8 @@ function displayResults(movies) {
   
     movies.results.map(movie => {     
         movieDisplay.innerHTML += `
-        <div class = "movie_poster reveal" onclick = "generateMovieInfo(${movie.id})"> 
-        <img class = "movie_poster_img" alt = "movie poster image" src = "https://image.tmdb.org/t/p/w342${movie.poster_path}"> 
+        <div class = "movie-card reveal" onclick = "generateMovieInfo(${movie.id})"> 
+        <img class = "movie-poster" alt = "movie poster image" src = "https://image.tmdb.org/t/p/w342${movie.poster_path}"> 
         <p class = "rating"><img class = "rating_icon" src = "star_icon.png"> ${movie.vote_average}</p>
         <p class = "movie_title">${movie.title}<p>
         </div>`
