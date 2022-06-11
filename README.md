@@ -42,6 +42,7 @@ Deployed Application (optional): [Flixster Deployed Site](https://stephboss9.git
 
 ### Walkthrough Video
 
+<img src='Flixster_Walkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 <iframe 
 src="https://www.loom.com/embed/55cc93d04cc14b3dbfe73fd84d5e47dc" frameborder="0" 
