@@ -78,5 +78,6 @@ Add your response here
 ### Shout out
 
 Give a shout out to somebody from your cohort that especially helped you during your project. This can be a fellow peer, instructor, TA, mentor, etc.
+                                                                       
 I would like to shoutout Roy, he helped me a lot in every area of developing my website including, logic and styling. He also reminded me how useful the chrome debugger tools are. Shout out to Angelo, we partnered up the first day of developing our project, helped each other out while getting to know each other and
 accomplished a great amount. Also shout out to Amantina she recomended to me a very useful source for implementing the pop up feature. 
