@@ -1,12 +1,23 @@
 
 
-## Week 1 Assignment: Flixster
+## Flixster
 
 Submitted by: **Stephane Mbenga**
 
-Estimated time spent: **8** hours spent in total
+Deployed Application: [Flixster Deployed Site](https://stephboss9.github.io/flixster_movie_app/)
 
-Deployed Application (optional): [Flixster Deployed Site](https://stephboss9.github.io/flixster_movie_app/)
+## Introduction:
+Flixster is a web application that shows the latest and trending movies all on a beautiful and appealing user interface using The Movie Database API.
+I created this application during my participation in the Summer Interhnsip For Tech Excellence program at CodePath. I am very proud of this project.
+I spent lots of time to make it look nice and work smoothly. Give it a try!
+
+The API I used to fetch movie information is located here: https://developer.themoviedb.org/docs.
+
+### Walkthrough Video
+
+<img src='Flixster_Walkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+Loom Video Walkthrough: "https://www.loom.com/embed/55cc93d04cc14b3dbfe73fd84d5e47dc"
 
 ### Application Features
 
@@ -40,15 +51,6 @@ Deployed Application (optional): [Flixster Deployed Site](https://stephboss9.git
 - [x] Allow movie video trailers to be played using [embedded YouTube](https://support.google.com/youtube/answer/171780?hl=en)
 - [x] Implement anything else that you can get done to improve the app functionality!
 
-### Walkthrough Video
-
-<img src='Flixster_Walkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-
-<iframe 
-src="https://www.loom.com/embed/55cc93d04cc14b3dbfe73fd84d5e47dc" frameborder="0" 
-webkitallowfullscreen mozallowfullscreen allowfullscreen 
-style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-</iframe>
 
 ### Reflection
 
