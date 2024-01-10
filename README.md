@@ -1,5 +1,7 @@
 
 
+# Currently rebuilding this project using React.js + TypeScript and Styled Components!!
+
 ## Flixster
 
 Submitted by: **Stephane Mbenga**
