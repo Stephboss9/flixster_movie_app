@@ -1,20 +1,37 @@
-import "./Navigation.css";
 import {
-  NavWrapper,
+  NavHeader,
   Title,
-  FlixsterLogo,
-  NavHead
-} from './NavStyle';
+  NavWrapper,
+  NavLinks,
+  Link,
+  SearchButton,
+  SearchBox,
+  SearchInput,
+  TextInput,
+  MainSearchIcon,
+  SubSearchIcon,
+} from './NavStyle'
 
 
 function Navigation() {
   return (<>
-    <NavWrapper>
-      <NavHead>
-        <Title />
-        <FlixsterLogo />
-      </NavHead>
-    </NavWrapper>
+  <NavWrapper>
+    <NavHeader>
+      <Title>Flixster</Title>
+      <NavLinks>
+        <Link>Home</Link>
+        <Link>Popular</Link>
+        <Link>Top Rated</Link>
+        <Link>Trending</Link>
+        <Link>Upcoming</Link>
+      </NavLinks>
+      <SearchBox>
+        <SearchButton>
+        <MainSearchIcon/>
+        </SearchButton>
+      </SearchBox>
+    </NavHeader>
+  </NavWrapper>
   </>)
 }
 

@@ -66,12 +66,12 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 } */
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fredoka+One&family=Kanit:wght@200&family=Limelight&family=Staatliches&display=swap");
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Fredoka One', cursive;
   scroll-behavior: smooth;
 
 }
@@ -81,11 +81,14 @@ button:focus-visible {
     /*box-shadow settings*/
     0.125em 0.125em 0.25em rgba(0, 0, 0, .15);
   --background-color: #333;
+  --nav-link-color:#e5e5e5;
+  --nav-link-active:#fff;
 }
 
 /*body styling*/
 body {
   background-color: var(--background-color);
+  font-family: 'Fredoka One', cursive;
 }
 
 
