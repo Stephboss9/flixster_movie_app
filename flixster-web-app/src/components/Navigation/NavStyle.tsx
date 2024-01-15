@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import logo from '../../assets/logo.png';
-import searchIcon from '../../assets/search-2905.svg'
 export const FlixsterLogo = styled.img`
     width:160px;
     height:80px;
@@ -26,7 +25,7 @@ export const NavHeader = styled.div`
 export const Title = styled.h1`
     font-size:3rem;
     color:rgb(248, 71, 95);
-    margin-right:25px;
+    margin-right:35px;
 `;
 
 export const NavLinks = styled.div`
@@ -41,7 +40,8 @@ export const NavLinks = styled.div`
 export const Link = styled.span`
     color:inherit;
     margin:0 5px;
-    font-size:1.2rem;
+    font-size:1.4rem;
+    margin-right:20px;
 `
 
 export const SearchButton = styled.button`
@@ -50,43 +50,34 @@ export const SearchButton = styled.button`
     border:none;
 `;
 
-export const MainSearchIcon = styled.img`
+export const SearchIcon = styled.img`
     width:50px;
     height:50px;
     border-radius:5px;
 `
 
 
-export const SearchInput = styled.div`
-    display:flex;
-    align-items:center;
-    border-radius:5px;
-    `;
-
-export const TextInput = styled.input`
+export const SearchInput = styled.input`
     background:transparent;
+    border-radius:5px;
     font-size: 16px;
+    color:white;
     border-radius: 4px;
     height:50px;
-`;
+    width:100%;
+    padding:5px;
+    `;
 
-
-export const SearchBox = styled.div`
+export const SearchBox = styled.form`
     display:flex;
     align-items:center;
+    width:400px;
+    flex:.4;
 `;
-
 
 
 
 FlixsterLogo.defaultProps = {
     src: logo,
-}
-
-MainSearchIcon.defaultProps = {
-    src: searchIcon,
-}
-SubSearchIcon.defaultProps = {
-    src: searchIcon,
 }
 
