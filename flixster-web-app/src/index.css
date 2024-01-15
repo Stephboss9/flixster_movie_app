@@ -1,4 +1,4 @@
-:root {
+/* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -65,4 +65,34 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+} */
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fredoka+One&family=Kanit:wght@200&family=Limelight&family=Staatliches&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+
+}
+
+:root {
+  --bs: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.25),
+    /*box-shadow settings*/
+    0.125em 0.125em 0.25em rgba(0, 0, 0, .15);
+  --background-color: #333;
+  --nav-link-color:#e5e5e5;
+  --nav-link-active:#fff;
+}
+
+/*body styling*/
+body {
+  background-color: var(--background-color);
+  font-family: 'Fredoka One', cursive;
+}
+
+
+/*nav_bar styling*/
+#nav_bar {
+  background: rgb(26, 26, 26);
 }
