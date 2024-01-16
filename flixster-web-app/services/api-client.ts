@@ -20,7 +20,7 @@ class ApiClient {
 
         try {
             const request = await axios.get(requestUrl);
-            const response = request.data;
+            const response = request.data.results;
             return { movies: response, error: null };
         }
         catch (error) {
@@ -35,6 +35,7 @@ class ApiClient {
         const parameters: string = `&language=en-US&page=${page}`
         return await this.request(endpoint, parameters);
     }
+
 }
 
 export default ApiClient;
