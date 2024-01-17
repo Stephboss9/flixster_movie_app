@@ -35,14 +35,15 @@ export const NavLinks = styled.div`
     text-align:center;
     color:var(--nav-link-color);
     flex:1;
-`
+`;
 
 export const Link = styled.span`
     color:inherit;
     margin:0 5px;
     font-size:1.4rem;
     margin-right:20px;
-`
+    cursor:pointer;
+`;
 
 export const SearchButton = styled.button`
     cursor:pointer;
@@ -54,7 +55,7 @@ export const SearchIcon = styled.img`
     width:50px;
     height:50px;
     border-radius:5px;
-`
+`;
 
 
 export const SearchInput = styled.input`

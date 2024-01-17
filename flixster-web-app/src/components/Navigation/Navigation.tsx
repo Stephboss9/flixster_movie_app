@@ -1,4 +1,4 @@
-import { MouseEvent, ChangeEvent } from 'react'
+import React, { MouseEvent, ChangeEvent } from 'react'
 import { useState, useEffect } from 'react'
 import {
     NavHeader,
@@ -13,11 +13,18 @@ import {
 } from './NavStyle'
 import searchIcon from '../../assets/search-icon.svg';
 import clearIcon from '../../assets/clear-icon.svg';
+import ApiClient from '../../../services/api-client';
 
+type NavigationProps = {
+  setMovies:React.Dispatch<React.SetStateAction<[]>>;
+  setPage:React.Dispatch<React.SetStateAction<number>>;
+  page:number;
+}
 
-function Navigation() {
+const Navigation = ({setMovies, setPage, page}:NavigationProps)=> {
     const [isTyping, setIsTyping] = useState(false);
     const [userInput, setUserInput] = useState("");
+    const apiClient = new ApiClient();
 
     const handleOnInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const input = event.target.value;
@@ -35,15 +42,22 @@ function Navigation() {
         setIsTyping(userInput.trim() !== "");
     }
 
+    const handleOnHomeClick = async () => {
+      setPage(1);
+      const {movies} = await apiClient.getNowPlaying(page);
+      console.log(movies)
+      // setMovies(movies)
+    }
+    
     useEffect(() => {
-
     }, [isTyping])
     return (<>
         <NavWrapper>
             <NavHeader>
                 <Title>Flixster</Title>
                 <NavLinks>
-                    <Link>Home</Link>
+                    <Link
+                    onClick={handleOnHomeClick}>Home</Link>
                     <Link>Popular</Link>
                     <Link>Top Rated</Link>
                     <Link>Trending</Link>
