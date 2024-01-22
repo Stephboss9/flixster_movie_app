@@ -6,4 +6,7 @@ export const MovieGridWrapper = styled.div`
     align-items:center;
     flex-wrap:wrap;
     width:100%;
+    padding: 30px 0px;
+    font-family:Staatliches;
+    font-size: x-large;
 `;

@@ -45,8 +45,7 @@ const Navigation = ({setMovies, setPage, page}:NavigationProps)=> {
     const handleOnHomeClick = async () => {
       setPage(1);
       const {movies} = await apiClient.getNowPlaying(page);
-      console.log(movies)
-      // setMovies(movies)
+      setMovies(movies)
     }
     
     useEffect(() => {
@@ -74,7 +73,7 @@ const Navigation = ({setMovies, setPage, page}:NavigationProps)=> {
                         onChange={handleOnInputChange}
                         onBlur={handleOnInputBlur}
                         value={userInput}
-                        type="text" autoFocus />
+                        type="text"/>
                 </SearchBox>
             </NavHeader>
         </NavWrapper>
