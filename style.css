@@ -129,7 +129,6 @@ body {
     text-align: center;
     color: rgb(252, 254, 255);
     margin-bottom: 40px;
-    
 }
 .movie-poster {
     border: 1px solid #333;
@@ -138,7 +137,10 @@ body {
     margin-bottom: 10px;
 
 }
+.movie-card:hover {
+    z-index: 1;
 
+}
 .movie-poster:hover {
     border: 1px solid white;
     transform: scale(1.07);
