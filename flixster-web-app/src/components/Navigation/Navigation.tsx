@@ -53,23 +53,28 @@ const Navigation = ({setMovies, setPage, page}:NavigationProps)=> {
     return (<>
         <NavWrapper>
             <NavHeader>
-                <Title>Flixster</Title>
+                <Title data-testid='title'>Flixster</Title>
                 <NavLinks>
-                    <Link
-                    onClick={handleOnHomeClick}>Home</Link>
-                    <Link>Popular</Link>
-                    <Link>Top Rated</Link>
-                    <Link>Trending</Link>
-                    <Link>Upcoming</Link>
+                    <Link 
+                      data-testid="nav-link"
+                      onClick={handleOnHomeClick}
+                      >Home</Link>
+                    <Link data-testid="nav-link">Popular</Link>
+                    <Link data-testid="nav-link">Top Rated</Link>
+                    <Link data-testid="nav-link">Trending</Link>
+                    <Link data-testid="nav-link">Upcoming</Link>
                 </NavLinks>
                 <SearchBox>
                     <SearchButton
+                        data-testid="search-button"
                         onClick={handleClearClick}>
                         <SearchIcon
+                            data-testid="search-icon"
                             src={isTyping ? clearIcon : searchIcon}
                             alt={isTyping ? 'clear button icon' : 'search button icon'} />
                     </SearchButton>
                     <SearchInput
+                        data-testid="search-input"
                         onChange={handleOnInputChange}
                         onBlur={handleOnInputBlur}
                         value={userInput}
