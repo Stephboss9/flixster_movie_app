@@ -2,20 +2,21 @@ import {
     MovieGridWrapper
 } from './MovieGridStyle'
 import Movie from './Movie/Movie'
+import { MovieType } from '../../types/types'
 
 type MovieGridProps = {
-    movies:Array<{id:number, title:string, vote_average:number, poster_path:string}>;
+    movies: Array<MovieType>;
 }
 
-const MovieGrid = ({movies}: MovieGridProps) => {
+const MovieGrid = ({ movies }: MovieGridProps) => {
     return (<>
         <MovieGridWrapper>
-            {movies?.map( movie => 
+            {movies?.map(movie =>
                 <Movie key={movie.id} title={movie.title} posterUrl={movie.poster_path}
-                rating={movie.vote_average}/>
+                    rating={movie.vote_average} />
             )};
         </MovieGridWrapper>
-    
+
     </>);
 }
 
