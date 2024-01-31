@@ -9,9 +9,11 @@ const App = () => {
   const [page, setPage] = useState(1);
   const apiClient = new ApiClient();
 
+
+
   useEffect(() => {
     const getNowPlaying = async () => {
-      const { movies } = await apiClient.getNowPlaying(page);
+      const { movies } = await apiClient.getMovies(page, 'now_playing');
       setMovies(movies);
     }
     getNowPlaying();
