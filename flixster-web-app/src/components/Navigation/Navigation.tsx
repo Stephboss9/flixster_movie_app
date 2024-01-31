@@ -43,9 +43,23 @@ const Navigation = ({ setMovies, setPage, page }: NavigationProps) => {
         setIsTyping(userInput.trim() !== "");
     }
 
-    const handleOnHomeClick = async () => {
+    const handleOnNavLinkClick = async (movieListType: string) => {
         setPage(1);
-        const { movies } = await apiClient.getNowPlaying(page);
+        let movies;
+        switch (movieListType) {
+            case 'home':
+                movies = (await apiClient.getMovies(page, 'now_playing')).movies;
+                break;
+            case 'popular':
+                movies = (await apiClient.getMovies(page, 'popular')).movies;
+                break;
+            case 'top-rated':
+                movies = (await apiClient.getMovies(page, 'top_rated')).movies;
+                break;
+            case 'upcoming':
+                movies = (await apiClient.getMovies(page, 'upcoming')).movies;
+                break;
+        }
         setMovies(movies);
     }
 
@@ -59,12 +73,16 @@ const Navigation = ({ setMovies, setPage, page }: NavigationProps) => {
                 <NavLinks>
                     <Link
                         data-testid="nav-link"
-                        onClick={handleOnHomeClick}
-                    >Home</Link>
-                    <Link data-testid="nav-link">Popular</Link>
-                    <Link data-testid="nav-link">Top Rated</Link>
-                    <Link data-testid="nav-link">Trending</Link>
-                    <Link data-testid="nav-link">Upcoming</Link>
+                        onClick={() => handleOnNavLinkClick('home')}>Home</Link>
+                    <Link
+                        data-testid="nav-link"
+                        onClick={() => handleOnNavLinkClick('popular')}>Popular</Link>
+                    <Link
+                        data-testid="nav-link"
+                        onClick={() => handleOnNavLinkClick('top_rated')}>Top Rated</Link>
+                    <Link
+                        data-testid="nav-link"
+                        onClick={() => handleOnNavLinkClick('upcoming')}>Upcoming</Link>
                 </NavLinks>
                 <SearchBox>
                     <SearchButton
