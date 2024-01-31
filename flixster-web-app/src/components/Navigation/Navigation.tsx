@@ -53,7 +53,7 @@ const Navigation = ({ setMovies, setPage, page }: NavigationProps) => {
             case 'popular':
                 movies = (await apiClient.getMovies(page, 'popular')).movies;
                 break;
-            case 'top-rated':
+            case 'top rated':
                 movies = (await apiClient.getMovies(page, 'top_rated')).movies;
                 break;
             case 'upcoming':
@@ -79,7 +79,7 @@ const Navigation = ({ setMovies, setPage, page }: NavigationProps) => {
                         onClick={() => handleOnNavLinkClick('popular')}>Popular</Link>
                     <Link
                         data-testid="nav-link"
-                        onClick={() => handleOnNavLinkClick('top_rated')}>Top Rated</Link>
+                        onClick={() => handleOnNavLinkClick('top rated')}>Top Rated</Link>
                     <Link
                         data-testid="nav-link"
                         onClick={() => handleOnNavLinkClick('upcoming')}>Upcoming</Link>
