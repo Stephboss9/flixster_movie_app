@@ -30,8 +30,7 @@ class ApiClient {
 
 
     // gets the now playing movies
-    public async getNowPlaying(page: string) {
-        const endpoint: string = "now_playing";
+    async getMovies(page: number, endpoint: string) {
         const parameters: string = `&language=en-US&page=${page}`
         return await this.request(endpoint, parameters);
     }

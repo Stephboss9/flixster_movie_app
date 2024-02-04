@@ -1,4 +1,4 @@
-import { MouseEvent, ChangeEvent } from 'react'
+import React, { MouseEvent, ChangeEvent } from 'react'
 import { useState, useEffect } from 'react'
 import {
     NavHeader,
@@ -13,11 +13,19 @@ import {
 } from './NavStyle'
 import searchIcon from '../../assets/search-icon.svg';
 import clearIcon from '../../assets/clear-icon.svg';
+import ApiClient from '../../../services/api-client';
 
 
-function Navigation() {
+type NavigationProps = {
+    setMovies: React.Dispatch<React.SetStateAction<[]>>;
+    setPage: React.Dispatch<React.SetStateAction<number>>;
+    page: number;
+}
+
+const Navigation = ({ setMovies, setPage, page }: NavigationProps) => {
     const [isTyping, setIsTyping] = useState(false);
     const [userInput, setUserInput] = useState("");
+    const apiClient = new ApiClient();
 
     const handleOnInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const input = event.target.value;
@@ -35,32 +43,62 @@ function Navigation() {
         setIsTyping(userInput.trim() !== "");
     }
 
-    useEffect(() => {
+    const handleOnNavLinkClick = async (movieListType: string) => {
+        setPage(1);
+        let movies;
+        switch (movieListType) {
+            case 'home':
+                movies = (await apiClient.getMovies(page, 'now_playing')).movies;
+                break;
+            case 'popular':
+                movies = (await apiClient.getMovies(page, 'popular')).movies;
+                break;
+            case 'top rated':
+                movies = (await apiClient.getMovies(page, 'top_rated')).movies;
+                break;
+            case 'upcoming':
+                movies = (await apiClient.getMovies(page, 'upcoming')).movies;
+                break;
+        }
+        setMovies(movies);
+    }
 
+
+    useEffect(() => {
     }, [isTyping])
     return (<>
         <NavWrapper>
             <NavHeader>
-                <Title>Flixster</Title>
+                <Title data-testid='title'>Flixster</Title>
                 <NavLinks>
-                    <Link>Home</Link>
-                    <Link>Popular</Link>
-                    <Link>Top Rated</Link>
-                    <Link>Trending</Link>
-                    <Link>Upcoming</Link>
+                    <Link
+                        data-testid="nav-link"
+                        onClick={() => handleOnNavLinkClick('home')}>Home</Link>
+                    <Link
+                        data-testid="nav-link"
+                        onClick={() => handleOnNavLinkClick('popular')}>Popular</Link>
+                    <Link
+                        data-testid="nav-link"
+                        onClick={() => handleOnNavLinkClick('top rated')}>Top Rated</Link>
+                    <Link
+                        data-testid="nav-link"
+                        onClick={() => handleOnNavLinkClick('upcoming')}>Upcoming</Link>
                 </NavLinks>
                 <SearchBox>
                     <SearchButton
+                        data-testid="search-button"
                         onClick={handleClearClick}>
                         <SearchIcon
+                            data-testid="search-icon"
                             src={isTyping ? clearIcon : searchIcon}
                             alt={isTyping ? 'clear button icon' : 'search button icon'} />
                     </SearchButton>
                     <SearchInput
+                        data-testid="search-input"
                         onChange={handleOnInputChange}
                         onBlur={handleOnInputBlur}
                         value={userInput}
-                        type="text" autoFocus />
+                        type="text" />
                 </SearchBox>
             </NavHeader>
         </NavWrapper>
