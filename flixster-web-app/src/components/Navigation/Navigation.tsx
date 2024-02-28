@@ -1,4 +1,4 @@
-import React, { MouseEvent, ChangeEvent } from 'react'
+import React, { MouseEvent, ChangeEvent, useCallback} from 'react'
 import { useState, useEffect } from 'react'
 import {
     NavHeader,
@@ -14,6 +14,7 @@ import {
 import searchIcon from '../../assets/search-icon.svg';
 import clearIcon from '../../assets/clear-icon.svg';
 import ApiClient from '../../../services/api-client';
+import { debounce } from 'lodash';
 
 
 type NavigationProps = {
@@ -27,11 +28,14 @@ const Navigation = ({ setMovies, setPage, page }: NavigationProps) => {
     const [userInput, setUserInput] = useState("");
     const apiClient = new ApiClient();
 
-    const handleOnInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+
+    const handleOnInputChange = useCallback(debounce(async (event: ChangeEvent<HTMLInputElement>) => {
         const input = event.target.value;
         setUserInput(input);
         setIsTyping(userInput.trim() !== "");
-    };
+        const movies = (await apiClient.searchMovies(1, `movie`, input)).movies;
+        setMovies(movies);
+    }, 600), []);
 
     const handleClearClick = (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
@@ -97,7 +101,6 @@ const Navigation = ({ setMovies, setPage, page }: NavigationProps) => {
                         data-testid="search-input"
                         onChange={handleOnInputChange}
                         onBlur={handleOnInputBlur}
-                        value={userInput}
                         type="text" />
                 </SearchBox>
             </NavHeader>

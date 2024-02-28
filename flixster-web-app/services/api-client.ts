@@ -15,8 +15,10 @@ class ApiClient {
     }
 
 
-    private async request(endpoint: string, parameters: string) {
-        const requestUrl: string = `${this.apiUrl}${endpoint}?api_key=${API_KEY}&${parameters}`;
+    private async request(endpoint: string, parameters: string, search=false) {
+        const requestUrl: string = search ? 
+        `https://api.themoviedb.org/3/search/${endpoint}?api_key=${API_KEY}&${parameters}`:
+        `${this.apiUrl}${endpoint}?api_key=${API_KEY}&${parameters}`;
 
         try {
             const request = await axios.get(requestUrl);
@@ -34,6 +36,15 @@ class ApiClient {
         const parameters: string = `&language=en-US&page=${page}`
         return await this.request(endpoint, parameters);
     }
+
+     async searchMovies(page: number, endpoint: string, searchTerm: string) {
+        const parameters: string = `
+                &query=${searchTerm}
+                &language=en-US&page=${page}
+                `
+        return await this.request(endpoint, parameters, true);
+    }
+
 
 }
 
