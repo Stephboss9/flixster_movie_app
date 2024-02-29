@@ -1,5 +1,5 @@
 import React, { MouseEvent, ChangeEvent, useCallback} from 'react'
-import { useState, useEffect } from 'react'
+import { useState} from 'react'
 import {
     NavHeader,
     Title,
@@ -31,8 +31,6 @@ const Navigation = ({ setMovies, setPage, page }: NavigationProps) => {
 
     const handleOnInputChange = useCallback(debounce(async (event: ChangeEvent<HTMLInputElement>) => {
         const input = event.target.value;
-        setUserInput(input);
-        setIsTyping(userInput.trim() !== "");
         const movies = (await apiClient.searchMovies(1, `movie`, input)).movies;
         setMovies(movies);
     }, 600), []);
@@ -40,11 +38,11 @@ const Navigation = ({ setMovies, setPage, page }: NavigationProps) => {
     const handleClearClick = (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
         setUserInput("");
-        setIsTyping(!isTyping);
+        setIsTyping(false);
     }
 
-    const handleOnInputBlur = () => {
-        setIsTyping(userInput.trim() !== "");
+    const handleOnInputBlur = (event: ChangeEvent<HTMLInputElement>) => {
+        setIsTyping(event.target.value !== "");
     }
 
     const handleOnNavLinkClick = async (movieListType: string) => {
@@ -68,8 +66,6 @@ const Navigation = ({ setMovies, setPage, page }: NavigationProps) => {
     }
 
 
-    useEffect(() => {
-    }, [isTyping])
     return (<>
         <NavWrapper>
             <NavHeader>
@@ -99,7 +95,12 @@ const Navigation = ({ setMovies, setPage, page }: NavigationProps) => {
                     </SearchButton>
                     <SearchInput
                         data-testid="search-input"
-                        onChange={handleOnInputChange}
+                        onChange={(e) => {
+                            handleOnInputChange(e);
+                            setUserInput(e.target.value);
+                            setIsTyping(e.target.value !== "");
+                        }}
+                        value = {userInput}
                         onBlur={handleOnInputBlur}
                         type="text" />
                 </SearchBox>
