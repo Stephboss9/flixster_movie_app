@@ -7,6 +7,8 @@
  Currently converting the codebase from plain HTML, CSS, and Javascript to a Vite React+TypeScript & Styled Components
  
 Previously Deployed Application: [Flixster Deployed Site](https://stephboss9.github.io/flixster_movie_app/)
+
+
 Newly Deployed Application: in the works
 
 ## Introduction:
