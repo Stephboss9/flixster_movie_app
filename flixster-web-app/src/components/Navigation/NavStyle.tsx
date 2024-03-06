@@ -11,6 +11,8 @@ export const NavWrapper = styled.div`
     font-family: 'Bebas Neue', cursive;
     background: rgb(26, 26, 26);
     display:flex;
+    position:fixed;
+    z-index:1000;
     align-items:center;
     padding: 10px 20px;
 
