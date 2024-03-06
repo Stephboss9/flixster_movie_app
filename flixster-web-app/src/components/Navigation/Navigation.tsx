@@ -1,5 +1,5 @@
-import React, { MouseEvent, ChangeEvent, useCallback} from 'react'
-import { useState} from 'react'
+import React, { MouseEvent, ChangeEvent, useCallback } from 'react'
+import { useState } from 'react'
 import {
     NavHeader,
     Title,
@@ -46,6 +46,7 @@ const Navigation = ({ setMovies, setPage, page }: NavigationProps) => {
     }
 
     const handleOnNavLinkClick = async (movieListType: string) => {
+        window.scrollTo(0, 0);
         setPage(1);
         let movies;
         switch (movieListType) {
@@ -100,7 +101,7 @@ const Navigation = ({ setMovies, setPage, page }: NavigationProps) => {
                             setUserInput(e.target.value);
                             setIsTyping(e.target.value !== "");
                         }}
-                        value = {userInput}
+                        value={userInput}
                         onBlur={handleOnInputBlur}
                         type="text" />
                 </SearchBox>
