@@ -31,7 +31,7 @@ const Navigation = ({ setMovies, setPage, page }: NavigationProps) => {
 
     const handleOnInputChange = useCallback(debounce(async (event: ChangeEvent<HTMLInputElement>) => {
         const input = event.target.value;
-        const movies = (await apiClient.searchMovies(1, `movie`, input)).movies;
+        const movies = (await apiClient.searchMovies(1, `movie`, input)).data;
         setMovies(movies);
     }, 600), []);
 
@@ -51,16 +51,16 @@ const Navigation = ({ setMovies, setPage, page }: NavigationProps) => {
         let movies;
         switch (movieListType) {
             case 'home':
-                movies = (await apiClient.getMovies(page, 'now_playing')).movies;
+                movies = (await apiClient.getMovies(page, 'now_playing')).data;
                 break;
             case 'popular':
-                movies = (await apiClient.getMovies(page, 'popular')).movies;
+                movies = (await apiClient.getMovies(page, 'popular')).data;
                 break;
             case 'top rated':
-                movies = (await apiClient.getMovies(page, 'top_rated')).movies;
+                movies = (await apiClient.getMovies(page, 'top_rated')).data;
                 break;
             case 'upcoming':
-                movies = (await apiClient.getMovies(page, 'upcoming')).movies;
+                movies = (await apiClient.getMovies(page, 'upcoming')).data;
                 break;
         }
         setMovies(movies);

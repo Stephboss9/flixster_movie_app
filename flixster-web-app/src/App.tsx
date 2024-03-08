@@ -13,8 +13,8 @@ const App = () => {
 
   useEffect(() => {
     const getNowPlaying = async () => {
-      const { movies } = await apiClient.getMovies(page, 'now_playing');
-      setMovies(movies);
+      const { data } = await apiClient.getMovies(page, 'now_playing');
+      setMovies(data);
     }
     getNowPlaying();
   }, [])
@@ -22,7 +22,7 @@ const App = () => {
   return (
     <>
       <Navigation setMovies={setMovies} page={page} setPage={setPage} />
-      <MovieGrid movies={movies} />
+      <MovieGrid movies={movies} apiClient={apiClient} />
     </>
   );
 }
