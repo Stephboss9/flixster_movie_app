@@ -20,16 +20,17 @@ type MovieGridProps = {
 
 const MovieGrid = ({ movies, apiClient }: MovieGridProps) => {
     const [open, setOpen] = useState(false);
-    const [movieInfo, setMovieInfo] = useState({ overview: '', releaseDate: '', videoLink: '', rating: 0, title: '', time: 0 });
+    const [movieInfo, setMovieInfo] = useState({ overview: '', videoLink: '', title: '' });
 
-    const handleOpen = async (movieId: number) => {
+    const handleOpen = async (movieId: number, title: string, overview: string) => {
         // gather info for movie that was clicked on
-        const movieInfo = (await apiClient.getMovieInfo(movieId)).data;
-        const movieVid = (await apiClient.getMovieVideo(movieId)).data;
-        const movieVidLink: string = movieVid[0].key;
+        const movieVideos = (await apiClient.getMovieVideo(movieId)).data;
+
+        const movieTrailerLink: string = movieVideos.filter(
+            (vid: { key: string, type: string }) => vid.type === 'Trailer')[0].key || movieVideos[0].key;
         setMovieInfo({
-            overview: movieInfo.overview, releaseDate: movieInfo.release_date,
-            videoLink: movieVidLink, rating: movieInfo.vote_average, time: movieInfo.runtime, title: movieInfo.title,
+            overview: overview, title: title,
+            videoLink: movieTrailerLink
         });
 
         setOpen(true);
@@ -40,7 +41,7 @@ const MovieGrid = ({ movies, apiClient }: MovieGridProps) => {
         <MovieGridWrapper data-testid="movie-grid">
             {movies?.map(movie =>
                 <Movie key={movie.id} movieId={movie.id} title={movie.title} showMore={handleOpen}
-                    posterUrl={movie.poster_path} rating={movie.vote_average}
+                    overview={movie.overview} releaseDate={movie.release_date} posterUrl={movie.poster_path} rating={movie.vote_average}
                     data-testid="movie"
 
                 />
@@ -48,13 +49,15 @@ const MovieGrid = ({ movies, apiClient }: MovieGridProps) => {
             <Modal
                 open={open}
                 onClick={handleClose}
-                aria-labelledby="unstyled-mod"
-                aria-describedby="unstyled-modal-description">
+                aria-modal="true"
+                aria-labelledby="Movie Pop up"
+                aria-describedby="More info about movie including a trailer, movie description, and more">
                 <ModalContent>
                     <Trailer src={movieInfo.videoLink}></Trailer>
-                    <MovieTitle>{movieInfo.title}</MovieTitle>
-                    <MovieInfo>{movieInfo.time + " min | " + Math.round(movieInfo.rating) + "/10 | released: " + movieInfo.releaseDate}</MovieInfo>
-                    <MovieDescription>{movieInfo.overview}</MovieDescription>
+                    <MovieInfo>
+                        <MovieTitle>{movieInfo.title}</MovieTitle>
+                        <MovieDescription>{movieInfo.overview}</MovieDescription>
+                    </MovieInfo>
                 </ModalContent>
             </Modal>
         </MovieGridWrapper>
