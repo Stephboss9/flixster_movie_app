@@ -20,15 +20,15 @@ export const Modal = styled(BaseModal)`
   inset: 0;
   display: flex;
   flex-direction:column;
-  background:radial-gradient(black, transparent);
+  background:rgb(0, 0, 0, .5);
   align-items: center;
   justify-content: center;
 `
 
 const animateTop = keyframes`
     0% {
-        top:-300px;
-        opacity:0;
+        top:-200px;
+        opacity:.5;
     }
     100% {
         top:0; 
@@ -40,12 +40,11 @@ export const ModalContent = styled.div`
     display: flex;
     position:relative;
     flex-direction: column;
-    text-align:left;
-    align-items: center;
+
+    align-items: left;
     font-family: 'Kanit', sans-serif;
     height:600px;
     width:50%;
-    border: 1px solid white;
     background: var(--background-color);
     color: rgb(255, 255, 255);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -68,11 +67,15 @@ height:390px;
 `
 
 export const MovieInfo = styled.div`
-    display: flex;
-    justify-content:space-evenly;
-    
-`
+    display:flex;
+    flex-direction:column;
+    padding: 10px 10px
+    align-items:flex-start;
+    `
 export const MovieTitle = styled.h1`
+    margin-left:10px;
 `;
 export const MovieDescription = styled.p`
-width:70%`;
+    width:70%;
+    margin-left:10px;
+    `;
