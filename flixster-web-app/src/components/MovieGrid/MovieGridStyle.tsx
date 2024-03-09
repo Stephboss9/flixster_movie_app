@@ -69,13 +69,17 @@ height:390px;
 export const MovieInfo = styled.div`
     display:flex;
     flex-direction:column;
-    padding: 10px 10px
-    align-items:flex-start;
+    margin-left: 10px;
+    margin-right: 10px;
     `
 export const MovieTitle = styled.h1`
-    margin-left:10px;
 `;
 export const MovieDescription = styled.p`
-    width:70%;
-    margin-left:10px;
+    width:100%;
+    border-bottom: 1px solid white;
+    padding-bottom: 15px;
     `;
+
+export const MovieReleaseDate = styled.p`
+  margin-top: 15px;
+`
