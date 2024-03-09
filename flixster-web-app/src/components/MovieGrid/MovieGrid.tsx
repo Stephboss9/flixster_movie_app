@@ -6,9 +6,10 @@ import {
     MovieInfo,
     MovieTitle,
     MovieDescription,
+    MovieReleaseDate,
 } from './MovieGridStyle'
 import Movie from './Movie/Movie'
-import { MovieType } from '../../types/types'
+import { MovieModalInfoType, MovieType, MovieVideoType } from '../../types';
 import { useState } from 'react';
 import ApiClient from '../../../services/api-client';
 
@@ -20,19 +21,22 @@ type MovieGridProps = {
 
 const MovieGrid = ({ movies, apiClient }: MovieGridProps) => {
     const [open, setOpen] = useState(false);
-    const [movieInfo, setMovieInfo] = useState({ overview: '', videoLink: '', title: '' });
+    const [movieModalInfo, setMovieModalInfo] = useState({ overview: '', videoLink: '', title: '', releaseDate: '' });
 
-    const handleOpen = async (movieId: number, title: string, overview: string) => {
-        // gather info for movie that was clicked on
-        const movieVideos = (await apiClient.getMovieVideo(movieId)).data;
+    const handleOpen = async (movieModalInfo: MovieModalInfoType) => {
+        // fetch available videos from api
+        const movieVideos: Array<MovieVideoType> = (await apiClient.getMovieVideo(movieModalInfo.movieId)).data;
 
-        const movieTrailerLink: string = movieVideos.filter(
-            (vid: { key: string, type: string }) => vid.type === 'Trailer')[0].key || movieVideos[0].key;
-        setMovieInfo({
-            overview: overview, title: title,
-            videoLink: movieTrailerLink
+        // get a trailer from list of fetched videos else the first one in the list
+        const movieTrailerLink: string = (movieVideos.filter(
+            (vid: MovieVideoType) => vid.type === 'Trailer')[0].key || movieVideos[0].key);
+
+        setMovieModalInfo({
+            overview: movieModalInfo.overview, title: movieModalInfo.title,
+            videoLink: movieTrailerLink, releaseDate: movieModalInfo.release_date
         });
 
+        // open the modal once weve acquired movie information
         setOpen(true);
     }
     const handleClose = () => setOpen(false);
@@ -53,10 +57,11 @@ const MovieGrid = ({ movies, apiClient }: MovieGridProps) => {
                 aria-labelledby="Movie Pop up"
                 aria-describedby="More info about movie including a trailer, movie description, and more">
                 <ModalContent>
-                    <Trailer src={movieInfo.videoLink}></Trailer>
+                    <Trailer src={movieModalInfo.videoLink}></Trailer>
                     <MovieInfo>
-                        <MovieTitle>{movieInfo.title}</MovieTitle>
-                        <MovieDescription>{movieInfo.overview}</MovieDescription>
+                        <MovieTitle>{movieModalInfo.title}</MovieTitle>
+                        <MovieDescription>{movieModalInfo.overview}</MovieDescription>
+                        <MovieReleaseDate>{`released: ${movieModalInfo.releaseDate.slice(0, 4)}`}</MovieReleaseDate>
                     </MovieInfo>
                 </ModalContent>
             </Modal>
