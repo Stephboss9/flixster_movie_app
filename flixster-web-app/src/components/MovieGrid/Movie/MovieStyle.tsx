@@ -1,12 +1,21 @@
 import { styled, keyframes } from "styled-components";
-
+import { Modal as BaseModal } from '@mui/base/Modal';
 
 const revealAnimation = keyframes`
     0% {
-        transform: translateY(150px);
+        transform: translateY(30px);
         opacity: 0;
     }
-
+    50% {
+        transform: translateX(20px);
+        opacity: 1;
+ 
+    }
+    75% {
+        transform: translateX(-20px);
+        opacity: 1;
+ 
+    }
     100% {
         transform: translateY(0px);
         opacity:1;
@@ -25,7 +34,7 @@ export const MovieCardWrapper = styled.div`
         z-index:1;
     }
     position: relative;
-    animation: ${revealAnimation} .8s ease-in-out;
+    animation: ${revealAnimation} 1s ease-in-out;
 `;
 export const MovieTitle = styled.p`
     color:inherit;
@@ -49,4 +58,20 @@ export const RatingIcon = styled.img`
     height:20px;
 `;
 export const MovieRating = styled.p``;
+
+export const Modal = styled(BaseModal)`
+  position: fixed;
+  z-index: 1300;
+  inset: 0;
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+  justify-content: center;
+`
+
+export const ModalContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+`
 

@@ -1,4 +1,6 @@
 import starIcon from '../../../assets/star_icon.png';
+import { MovieModalInfoType } from '../../../types';
+
 import {
     MovieCardWrapper,
     MoviePoster,
@@ -8,20 +10,31 @@ import {
 } from './MovieStyle';
 
 type MovieCardProps = {
+    movieId: number;
     title: string;
     posterUrl: string;
-    rating:number;
+    rating: number;
+    overview: string;
+    releaseDate: string;
+    showMore: (movieModalInfo: MovieModalInfoType) => void;
 };
 
 // movie card component
-const Movie = ({title, posterUrl, rating}: MovieCardProps) => {
-    const imgBaseUrl:string = import.meta.env.VITE_IMG_BASE_URL;
+const Movie = ({ movieId, title, posterUrl, rating, overview, releaseDate, showMore }: MovieCardProps) => {
+    const movieModalInfo: MovieModalInfoType = { movieId: movieId, title: title, overview: overview, release_date: releaseDate };
+    const imgBaseUrl: string = import.meta.env.VITE_IMG_BASE_URL;
+    const movieRating: string = `${(Math.round(rating))}/10`;
+
     return (<>
-        <MovieCardWrapper>
-            <MoviePoster src={imgBaseUrl + posterUrl}/>
+        <MovieCardWrapper
+            onClick={() => {
+                showMore(movieModalInfo);
+            }
+            }>
+            <MoviePoster src={imgBaseUrl + posterUrl} />
             <MovieRating>
-                <RatingIcon src={starIcon}/> 
-                {` ${(Math.round(rating))}/10`}
+                <RatingIcon src={starIcon} />
+                {movieRating}
             </MovieRating>
             <MovieTitle>{title}</MovieTitle>
         </MovieCardWrapper>

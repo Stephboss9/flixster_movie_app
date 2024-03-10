@@ -1,5 +1,5 @@
-import React, { MouseEvent, ChangeEvent, useCallback} from 'react'
-import { useState} from 'react'
+import React, { MouseEvent, ChangeEvent, useCallback } from 'react'
+import { useState } from 'react'
 import {
     NavHeader,
     Title,
@@ -31,7 +31,7 @@ const Navigation = ({ setMovies, setPage, page }: NavigationProps) => {
 
     const handleOnInputChange = useCallback(debounce(async (event: ChangeEvent<HTMLInputElement>) => {
         const input = event.target.value;
-        const movies = (await apiClient.searchMovies(1, `movie`, input)).movies;
+        const movies = (await apiClient.searchMovies(1, `movie`, input)).data;
         setMovies(movies);
     }, 600), []);
 
@@ -46,20 +46,21 @@ const Navigation = ({ setMovies, setPage, page }: NavigationProps) => {
     }
 
     const handleOnNavLinkClick = async (movieListType: string) => {
+        window.scrollTo(0, 0);
         setPage(1);
         let movies;
         switch (movieListType) {
             case 'home':
-                movies = (await apiClient.getMovies(page, 'now_playing')).movies;
+                movies = (await apiClient.getMovies(page, 'now_playing')).data;
                 break;
             case 'popular':
-                movies = (await apiClient.getMovies(page, 'popular')).movies;
+                movies = (await apiClient.getMovies(page, 'popular')).data;
                 break;
             case 'top rated':
-                movies = (await apiClient.getMovies(page, 'top_rated')).movies;
+                movies = (await apiClient.getMovies(page, 'top_rated')).data;
                 break;
             case 'upcoming':
-                movies = (await apiClient.getMovies(page, 'upcoming')).movies;
+                movies = (await apiClient.getMovies(page, 'upcoming')).data;
                 break;
         }
         setMovies(movies);
@@ -100,7 +101,7 @@ const Navigation = ({ setMovies, setPage, page }: NavigationProps) => {
                             setUserInput(e.target.value);
                             setIsTyping(e.target.value !== "");
                         }}
-                        value = {userInput}
+                        value={userInput}
                         onBlur={handleOnInputBlur}
                         type="text" />
                 </SearchBox>
