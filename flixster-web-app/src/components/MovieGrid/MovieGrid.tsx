@@ -7,6 +7,8 @@ import {
     MovieTitle,
     MovieDescription,
     MovieReleaseDate,
+    BackToTopLink,
+    BackToTopLinkWrapper
 } from './MovieGridStyle'
 import Movie from './Movie/Movie'
 import { MovieModalInfoType, MovieType, MovieVideoType } from '../../types';
@@ -42,14 +44,17 @@ const MovieGrid = ({ movies, apiClient }: MovieGridProps) => {
     const handleClose = () => setOpen(false);
 
     return (<>
-        <MovieGridWrapper data-testid="movie-grid">
+        <MovieGridWrapper id="movie-grid" data-testid="movie-grid">
             {movies?.map(movie =>
                 <Movie key={movie.id} movieId={movie.id} title={movie.title} showMore={handleOpen}
                     overview={movie.overview} releaseDate={movie.release_date} posterUrl={movie.poster_path} rating={movie.vote_average}
                     data-testid="movie"
 
                 />
-            )};
+            )}
+            <BackToTopLinkWrapper>
+                <BackToTopLink href='#movie-grid'>Back to top</BackToTopLink>
+            </BackToTopLinkWrapper>
             <Modal
                 open={open}
                 onClick={handleClose}

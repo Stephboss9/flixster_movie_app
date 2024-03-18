@@ -83,3 +83,16 @@ export const MovieDescription = styled.p`
 export const MovieReleaseDate = styled.p`
   margin-top: 15px;
 `
+
+export const BackToTopLinkWrapper = styled.p`
+    align-self: flex-end;
+    position: absolute;
+    padding: 5px 5px;
+    border-radius:8px;
+
+`;
+
+export const BackToTopLink = styled.a`
+    color: rgb(248, 71, 95);
+    text-decoration:none;
+`;
