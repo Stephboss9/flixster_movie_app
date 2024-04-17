@@ -92,6 +92,12 @@ export const BackToTopLinkWrapper = styled.p`
 
 `;
 
+export const LoadingHeader = styled.p`
+`;
+
+export const ErrorHeader = styled.h2`
+`;
+
 export const BackToTopLink = styled.a`
     color: rgb(248, 71, 95);
     text-decoration:none;
