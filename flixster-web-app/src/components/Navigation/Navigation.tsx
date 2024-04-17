@@ -15,24 +15,27 @@ import searchIcon from '../../assets/search-icon.svg';
 import clearIcon from '../../assets/clear-icon.svg';
 import ApiClient from '../../../services/api-client';
 import { debounce } from 'lodash';
+import { MovieType } from '../../types';
 
 
 type NavigationProps = {
-    setMovies: React.Dispatch<React.SetStateAction<[]>>;
+    setMovies: React.Dispatch<React.SetStateAction<Array<MovieType>>>;
     setPage: React.Dispatch<React.SetStateAction<number>>;
+    setMovieListCategory: React.Dispatch<React.SetStateAction<string>>;
+    setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
     page: number;
+    apiClient: ApiClient;
 }
 
-const Navigation = ({ setMovies, setPage, page }: NavigationProps) => {
+const Navigation = ({ setMovies, setPage, setMovieListCategory, setSearchQuery, apiClient }: NavigationProps) => {
     const [isTyping, setIsTyping] = useState(false);
     const [userInput, setUserInput] = useState("");
-    const apiClient = new ApiClient();
 
 
     const handleOnInputChange = useCallback(debounce(async (event: ChangeEvent<HTMLInputElement>) => {
-        const input = event.target.value;
-        const movies = (await apiClient.searchMovies(1, `movie`, input)).data;
-        setMovies(movies);
+        setSearchQuery(event.target.value);
+        setMovies([]);
+        setPage(1);
     }, 600), []);
 
     const handleClearClick = (event: MouseEvent<HTMLButtonElement>) => {
@@ -45,42 +48,29 @@ const Navigation = ({ setMovies, setPage, page }: NavigationProps) => {
         setIsTyping(event.target.value !== "");
     }
 
-    const handleOnNavLinkClick = async (movieListType: string) => {
+    const handleOnNavLinkClick = (movieListCategory: string) => {
         window.scrollTo(0, 0);
+        setMovieListCategory(movieListCategory);
+        setSearchQuery("")
+        setMovies([]);
         setPage(1);
-        let movies;
-        switch (movieListType) {
-            case 'home':
-                movies = (await apiClient.getMovies(page, 'now_playing')).data;
-                break;
-            case 'popular':
-                movies = (await apiClient.getMovies(page, 'popular')).data;
-                break;
-            case 'top rated':
-                movies = (await apiClient.getMovies(page, 'top_rated')).data;
-                break;
-            case 'upcoming':
-                movies = (await apiClient.getMovies(page, 'upcoming')).data;
-                break;
-        }
-        setMovies(movies);
     }
 
 
     return (<>
-        <NavWrapper>
+        <NavWrapper id='nav'>
             <NavHeader>
                 <Title data-testid='title'>Flixster</Title>
                 <NavLinks>
                     <Link
                         data-testid="nav-link"
-                        onClick={() => handleOnNavLinkClick('home')}>Home</Link>
+                        onClick={() => handleOnNavLinkClick('now_playing')}>Home</Link>
                     <Link
                         data-testid="nav-link"
                         onClick={() => handleOnNavLinkClick('popular')}>Popular</Link>
                     <Link
                         data-testid="nav-link"
-                        onClick={() => handleOnNavLinkClick('top rated')}>Top Rated</Link>
+                        onClick={() => handleOnNavLinkClick('top_rated')}>Top Rated</Link>
                     <Link
                         data-testid="nav-link"
                         onClick={() => handleOnNavLinkClick('upcoming')}>Upcoming</Link>

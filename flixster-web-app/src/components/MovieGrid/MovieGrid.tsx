@@ -7,19 +7,28 @@ import {
     MovieTitle,
     MovieDescription,
     MovieReleaseDate,
+    BackToTopLink,
+    BackToTopLinkWrapper,
+    LoadingHeader,
+    ErrorHeader,
 } from './MovieGridStyle'
 import Movie from './Movie/Movie'
 import { MovieModalInfoType, MovieType, MovieVideoType } from '../../types';
-import { useState } from 'react';
+import React, { useState, useRef, useCallback, useMemo } from 'react';
 import ApiClient from '../../../services/api-client';
 
 
 type MovieGridProps = {
     movies: Array<MovieType>;
     apiClient: ApiClient;
+    isLoading: boolean;
+    hasNextPage: boolean;
+    isError: boolean;
+    error: { message: string };
+    setPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const MovieGrid = ({ movies, apiClient }: MovieGridProps) => {
+const MovieGrid = ({ movies, apiClient, isLoading, hasNextPage, isError, error, setPage }: MovieGridProps) => {
     const [open, setOpen] = useState(false);
     const [movieModalInfo, setMovieModalInfo] = useState({ overview: '', videoLink: '', title: '', releaseDate: '' });
 
@@ -41,15 +50,43 @@ const MovieGrid = ({ movies, apiClient }: MovieGridProps) => {
     }
     const handleClose = () => setOpen(false);
 
+    // handles infinite scroll
+    const intObserver = useRef<IntersectionObserver | null>(null);
+    const lastPostRef = useCallback((movie: HTMLDivElement) => {
+        if (isLoading) return;
+
+        if (intObserver.current) intObserver.current.disconnect();
+
+        intObserver.current = new IntersectionObserver(moviess => {
+            if (moviess[0].isIntersecting && hasNextPage) {
+                setPage(prev => prev + 1);
+            }
+        })
+        if (movie) intObserver.current?.observe(movie);
+
+    }, [isLoading, hasNextPage]);
+
+
     return (<>
-        <MovieGridWrapper data-testid="movie-grid">
-            {movies?.map(movie =>
-                <Movie key={movie.id} movieId={movie.id} title={movie.title} showMore={handleOpen}
+        <MovieGridWrapper id="movie-grid" data-testid="movie-grid">
+            {movies?.map((movie, i) => {
+                if (movies.length === i + 1) {
+                    return (<Movie key={movie.id} movieId={movie.id} title={movie.title} showMore={handleOpen}
+                        overview={movie.overview} releaseDate={movie.release_date} posterUrl={movie.poster_path} rating={movie.vote_average}
+                        data-testid="movie" ref={lastPostRef}
+                    />)
+                }
+                return (<Movie key={movie.id} movieId={movie.id} title={movie.title} showMore={handleOpen}
                     overview={movie.overview} releaseDate={movie.release_date} posterUrl={movie.poster_path} rating={movie.vote_average}
                     data-testid="movie"
-
-                />
-            )};
+                />)
+            }
+            )}
+            {isLoading && <LoadingHeader>Loading more movies!</LoadingHeader>}
+            {isError && <ErrorHeader>{error.message}</ErrorHeader>}
+            <BackToTopLinkWrapper>
+                <BackToTopLink href='#movie-grid'>Back to top</BackToTopLink>
+            </BackToTopLinkWrapper>
             <Modal
                 open={open}
                 onClick={handleClose}
