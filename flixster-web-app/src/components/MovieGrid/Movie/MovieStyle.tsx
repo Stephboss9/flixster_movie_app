@@ -63,16 +63,6 @@ export const RatingIcon = styled.img`
         `;
 export const MovieRating = styled.p``;
 
-export const Modal = styled(BaseModal)`
-        position: fixed;
-        z-index: 1300;
-        inset: 0;
-        display: flex;
-        flex-direction:column;
-        align-items: center;
-        justify-content: center;
-        `
-
 export const ModalContent = styled.div`
         display: flex;
         flex-direction: column;
