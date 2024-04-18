@@ -16,7 +16,7 @@ export const MovieGridWrapper = styled.div`
 
 export const Modal = styled(BaseModal)`
   position: fixed;
-  z-index: 1300;
+  z-index: 4;
   inset: 0;
   display: flex;
   flex-direction:column;
@@ -98,7 +98,36 @@ export const LoadingHeader = styled.p`
 export const ErrorHeader = styled.h2`
 `;
 
-export const BackToTopLink = styled.a`
-    color: rgb(248, 71, 95);
-    text-decoration:none;
+const scrollBtnAnimation = keyframes`
+    0% {
+        bottom: 50px;
+        opacity:.5;
+    }
+    100% {
+        bottom: 20px; 
+        opacity:1;
+    }
 `;
+
+export const BackToTopBtn = styled.button`
+    position: fixed;
+    z-index: 3;
+    bottom: 20px;
+    right: 20px;
+    font-size:26px;
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    outline: none;
+    border: 3px solid #333;
+    border-radius: 50%;
+    &:hover,
+    &:focus {
+        background-color: #333;
+        color: #fff;
+    }
+    animation:${scrollBtnAnimation} 1s ease-in-out;
+`;
+

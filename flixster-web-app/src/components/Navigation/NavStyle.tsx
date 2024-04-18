@@ -12,7 +12,7 @@ export const NavWrapper = styled.div`
     background: rgb(26, 26, 26);
     display:flex;
     position:fixed;
-    z-index:1000;
+    z-index:2;
     align-items:center;
     padding: 10px 20px;
 

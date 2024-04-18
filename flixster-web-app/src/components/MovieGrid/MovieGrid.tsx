@@ -7,14 +7,15 @@ import {
     MovieTitle,
     MovieDescription,
     MovieReleaseDate,
-    BackToTopLink,
-    BackToTopLinkWrapper,
+    BackToTopBtn,
     LoadingHeader,
     ErrorHeader,
 } from './MovieGridStyle'
 import Movie from './Movie/Movie'
 import { MovieModalInfoType, MovieType, MovieVideoType } from '../../types';
-import React, { useState, useRef, useCallback, useMemo } from 'react';
+import React, { useState, useRef, useCallback, useMemo, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAnglesUp } from '@fortawesome/free-solid-svg-icons';
 import ApiClient from '../../../services/api-client';
 
 
@@ -29,8 +30,10 @@ type MovieGridProps = {
 }
 
 const MovieGrid = ({ movies, apiClient, isLoading, hasNextPage, isError, error, setPage }: MovieGridProps) => {
+
     const [open, setOpen] = useState(false);
     const [movieModalInfo, setMovieModalInfo] = useState({ overview: '', videoLink: '', title: '', releaseDate: '' });
+    const [scrollPos, setScrollPos] = useState(0);
 
     const handleOpen = async (movieModalInfo: MovieModalInfoType) => {
         // fetch available videos from api
@@ -49,7 +52,7 @@ const MovieGrid = ({ movies, apiClient, isLoading, hasNextPage, isError, error, 
         setOpen(true);
     }
     const handleClose = () => setOpen(false);
-
+    const scrollToTop = () => window.scrollTo(0, 0);
     // handles infinite scroll
     const intObserver = useRef<IntersectionObserver | null>(null);
     const lastPostRef = useCallback((movie: HTMLDivElement) => {
@@ -65,6 +68,13 @@ const MovieGrid = ({ movies, apiClient, isLoading, hasNextPage, isError, error, 
         if (movie) intObserver.current?.observe(movie);
 
     }, [isLoading, hasNextPage]);
+
+    useEffect(() => {
+        window.addEventListener('scroll', () => setScrollPos(window.pageYOffset));
+        return () => {
+            window.removeEventListener('scroll', () => setScrollPos(window.pageYOffset));
+        };
+    }, []);
 
 
     return (<>
@@ -82,11 +92,9 @@ const MovieGrid = ({ movies, apiClient, isLoading, hasNextPage, isError, error, 
                 />)
             }
             )}
+            {scrollPos > 300 ? <BackToTopBtn onClick={scrollToTop}><FontAwesomeIcon icon={faAnglesUp} /></BackToTopBtn> : null}
             {isLoading && <LoadingHeader>Loading more movies!</LoadingHeader>}
             {isError && <ErrorHeader>{error.message}</ErrorHeader>}
-            <BackToTopLinkWrapper>
-                <BackToTopLink href='#movie-grid'>Back to top</BackToTopLink>
-            </BackToTopLinkWrapper>
             <Modal
                 open={open}
                 onClick={handleClose}
