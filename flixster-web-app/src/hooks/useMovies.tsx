@@ -21,7 +21,7 @@ export const useMovies = ({ page, movieListCategory, api, searchQuery = '', setM
 
     useEffect(() => {
         setIsLoading(true);
-        setError({});
+        setError({ message: "" });
         setIsError(false);
 
         if (searchQuery) {
