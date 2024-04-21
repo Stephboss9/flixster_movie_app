@@ -18,7 +18,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAnglesUp } from '@fortawesome/free-solid-svg-icons';
 import ApiClient from '../../../services/api-client';
 
-
 type MovieGridProps = {
     movies: Array<MovieType>;
     apiClient: ApiClient;
@@ -39,7 +38,7 @@ const MovieGrid = ({ movies, apiClient, isLoading, hasNextPage, isError, error, 
         // fetch available videos from api
         const movieVideos: Array<MovieVideoType> = (await apiClient.getMovieVideo(movieModalInfo.movieId)).data;
 
-        // get a trailer from list of fetched videos else the first one in the list
+        // gets a trailer from list of fetched videos else the first one in the list
         const movieTrailerLink: string = (movieVideos.filter(
             (vid: MovieVideoType) => vid.type === 'Trailer')[0].key || movieVideos[0].key);
 

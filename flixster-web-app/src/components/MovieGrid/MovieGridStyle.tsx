@@ -93,6 +93,7 @@ export const BackToTopLinkWrapper = styled.p`
 `;
 
 export const LoadingHeader = styled.p`
+    color: #fff;
 `;
 
 export const ErrorHeader = styled.h2`
