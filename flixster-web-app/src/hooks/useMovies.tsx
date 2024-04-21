@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import ApiClient from '../../services/api-client';
 import { MovieType } from '../types';
-import { debounce } from 'lodash';
-import e from 'express';
 
 type useMoviesHookType = {
     page: number;
@@ -12,6 +10,10 @@ type useMoviesHookType = {
     setMovies: React.Dispatch<React.SetStateAction<Array<MovieType>>>;
 }
 
+/** 
+ * A hook that handles retrieving movies based on specefic categorys and user typed input, 
+   and updates the appropriate state variables like the movies state
+*/
 export const useMovies = ({ page, movieListCategory, api, searchQuery = '', setMovies }: useMoviesHookType) => {
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
@@ -24,40 +26,24 @@ export const useMovies = ({ page, movieListCategory, api, searchQuery = '', setM
         setError({ message: "" });
         setIsError(false);
 
-        if (searchQuery) {
-            api.searchMovies(page, 'movie', searchQuery).then(result => {
-                newMovies = result.data;
-                setMovies(prev => [...prev, ...newMovies]);
-                setHasNextPage(Boolean(newMovies.length)); // sets flag based on whether there are more results
-                setIsLoading(false);
-                setIsError(false);
-            }).catch(e => {
-                setIsLoading(false);
-                setIsError(true);
-                setError({ message: e.message });
-
+        api.getMovies(page, movieListCategory, searchQuery).then(result => {
+            newMovies = result.data;
+            setMovies(prevMovies => {
+                // Filter out duplicate movies based on some unique identifier (e.g., ID)
+                const uniqueNewMovies = newMovies.filter(newMovie => !prevMovies.some(prevMovie => prevMovie.id === newMovie.id));
+                return [...prevMovies, ...uniqueNewMovies];
             });
-        } else {
-            api.getMovies(page, movieListCategory).then(result => {
-                newMovies = result.data;
-                setMovies(prevMovies => {
-                    // Filter out duplicate movies based on some unique identifier (e.g., ID)
-                    const uniqueNewMovies = newMovies.filter(newMovie => !prevMovies.some(prevMovie => prevMovie.id === newMovie.id));
-                    return [...prevMovies, ...uniqueNewMovies];
-                });
-                setHasNextPage(Boolean(newMovies.length)); // sets flag based on whether there are more results
-                setIsLoading(false);
-                setIsError(false);
-            }).catch(e => {
-                setIsLoading(false);
-                setIsError(true);
-                setError({ message: e.message });
-            })
-        }
-
+            setHasNextPage(Boolean(newMovies.length));
+            setIsLoading(false);
+            setIsError(false);
+        }).catch(e => {
+            setIsLoading(false);
+            setIsError(true);
+            setError({ message: e.message });
+        });
 
         return;
-    }, [page, movieListCategory])
+    }, [page, movieListCategory, searchQuery])
 
     return { isLoading, isError, error, hasNextPage };
 }

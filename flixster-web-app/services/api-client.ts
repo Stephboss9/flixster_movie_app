@@ -14,11 +14,9 @@ class ApiClient {
         this.apiKey = apiKey;
     }
 
-
-    private async request(endpoint: string, parameters: string, search = false) {
-        const requestUrl: string = search ?
-            `https://api.themoviedb.org/3/search/${endpoint}?api_key=${API_KEY}&${parameters}&language=en-US` :
-            `${this.apiUrl}${endpoint}?api_key=${API_KEY}&${parameters}`;
+    // makes the api request
+    private async request(endpoint: string, parameters: string) {
+        const requestUrl: string = `${this.apiUrl}${endpoint}?api_key=${API_KEY}${parameters}`;
         try {
             const request = await axios.get(requestUrl);
             const response = request.data.results || request.data;
@@ -30,26 +28,20 @@ class ApiClient {
     }
 
 
-    // gets the now playing movies
-    async getMovies(page: number, endpoint: string) {
-        const parameters: string = `&page=${page}`
+
+    async getMovies(page: number, category: string, searchQuery = "") {
+        let parameters: string = `&page=${page}`, endpoint = `/movie/${category}`;
+
+        if (searchQuery) {
+            endpoint = "/search/movie";
+            parameters += `&query=${searchQuery}`;
+        }
+
         return await this.request(endpoint, parameters);
     }
 
-    async searchMovies(page: number, endpoint: string, searchTerm: string) {
-        const parameters: string = `
-                &query=${searchTerm}
-                &page=${page}
-                `
-        return await this.request(endpoint, parameters, true);
-    }
-
-    async getMovieInfo(movieId: number) {
-        return await this.request(String(movieId), '');
-    }
-
     async getMovieVideo(movieId: number) {
-        return await this.request(`${movieId}/videos`, '');
+        return await this.request(`/movie/${movieId}/videos`, '');
     }
 
 
