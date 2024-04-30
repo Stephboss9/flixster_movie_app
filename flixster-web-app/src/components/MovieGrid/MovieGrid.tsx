@@ -13,7 +13,7 @@ import {
 } from './MovieGridStyle'
 import Movie from './Movie/Movie'
 import { MovieModalInfoType, MovieType, MovieVideoType } from '../../types';
-import React, { useState, useRef, useCallback, useMemo, useEffect } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAnglesUp } from '@fortawesome/free-solid-svg-icons';
 import ApiClient from '../../../services/api-client';
@@ -50,23 +50,6 @@ const MovieGrid = ({ movies, apiClient, isLoading, hasNextPage, isError, error, 
 
         // open the modal once weve acquired movie information
         setOpen(true);
-    }
-
-    // handles assigning a css animation to the back to top button
-    const handleAnimation = (): string => {
-
-        // assigns opening css animation
-        if (scrollPos > 300) {
-            return 'appear';
-        } else {
-            // assigns closing css animation
-            if (styledRef.current) {
-                let animationStatus: string = styledRef.current.getAttribute('animation') as string;
-                if (animationStatus === "appear")
-                    return 'exit';
-            }
-        }
-        return "";
     }
 
     const handleClose = () => setOpen(false);
@@ -110,7 +93,8 @@ const MovieGrid = ({ movies, apiClient, isLoading, hasNextPage, isError, error, 
                 />)
             }
             )}
-            {<BackToTopBtn onClick={scrollToTop} visibility={scrollPos > 300} animationType={handleAnimation()} ref={styledRef}><FontAwesomeIcon icon={faAnglesUp} /></BackToTopBtn>}
+            {<BackToTopBtn onClick={scrollToTop} 
+            visibility={scrollPos > 300}  ref={styledRef}><FontAwesomeIcon icon={faAnglesUp} /></BackToTopBtn>}
             {isLoading && <LoadingHeader>Loading more movies!</LoadingHeader>}
             {isError && <ErrorHeader>{error.message}</ErrorHeader>}
             <Modal

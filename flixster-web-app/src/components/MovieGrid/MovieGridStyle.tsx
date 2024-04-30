@@ -112,16 +112,15 @@ const openingBtnAnimation = keyframes`
 
 const closingBtnAnimation = keyframes`
     0% {
-        bottom: 20px;
+        bottom: 100px;
         opacity: 1;
     }
     100% {
-        bottom: 50px;
+        bottom: 150px;
         opacity: .5;
     }
 `;
 type BackToTopBtnProps = {
-    animationType: string;
     visibility: boolean;
 };
 
@@ -144,21 +143,13 @@ export const BackToTopBtn = styled.button<BackToTopBtnProps>`
         background-color: #333;
         color: #fff;
     }
-    animation:${props => {
-        if (props.animationType === "appear")
-            return openingBtnAnimation;
-        if (props.animationType === 'exit')
-            return closingBtnAnimation;
-    }} 1s ease-in-out;
     display: ${props => {
         if (props.visibility)
             return "block";
         else {
-            setTimeout(function () {
-                return "none";
-            }, 500);
+            return 'none';
         }
     }};
-
+    animation:${openingBtnAnimation} 1s ease-in-out;
 `;
 
