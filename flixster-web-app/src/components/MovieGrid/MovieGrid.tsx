@@ -33,6 +33,7 @@ const MovieGrid = ({ movies, apiClient, isLoading, hasNextPage, isError, error, 
     const [open, setOpen] = useState(false);
     const [movieModalInfo, setMovieModalInfo] = useState({ overview: '', videoLink: '', title: '', releaseDate: '' });
     const [scrollPos, setScrollPos] = useState(0);
+    const styledRef = useRef<HTMLButtonElement>(null);
 
     const handleOpen = async (movieModalInfo: MovieModalInfoType) => {
         // fetch available videos from api
@@ -50,6 +51,24 @@ const MovieGrid = ({ movies, apiClient, isLoading, hasNextPage, isError, error, 
         // open the modal once weve acquired movie information
         setOpen(true);
     }
+
+    // handles assigning a css animation to the back to top button
+    const handleAnimation = (): string => {
+
+        // assigns opening css animation
+        if (scrollPos > 300) {
+            return 'appear';
+        } else {
+            // assigns closing css animation
+            if (styledRef.current) {
+                let animationStatus: string = styledRef.current.getAttribute('animation') as string;
+                if (animationStatus === "appear")
+                    return 'exit';
+            }
+        }
+        return "";
+    }
+
     const handleClose = () => setOpen(false);
     const scrollToTop = () => window.scrollTo(0, 0);
     // handles infinite scroll
@@ -91,7 +110,7 @@ const MovieGrid = ({ movies, apiClient, isLoading, hasNextPage, isError, error, 
                 />)
             }
             )}
-            {scrollPos > 300 ? <BackToTopBtn onClick={scrollToTop}><FontAwesomeIcon icon={faAnglesUp} /></BackToTopBtn> : null}
+            {<BackToTopBtn onClick={scrollToTop} visibility={scrollPos > 300} animationType={handleAnimation()} ref={styledRef}><FontAwesomeIcon icon={faAnglesUp} /></BackToTopBtn>}
             {isLoading && <LoadingHeader>Loading more movies!</LoadingHeader>}
             {isError && <ErrorHeader>{error.message}</ErrorHeader>}
             <Modal
