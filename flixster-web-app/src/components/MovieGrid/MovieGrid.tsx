@@ -13,7 +13,7 @@ import {
 } from './MovieGridStyle'
 import Movie from './Movie/Movie'
 import { MovieModalInfoType, MovieType, MovieVideoType } from '../../types';
-import React, { useState, useRef, useCallback, useMemo, useEffect } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAnglesUp } from '@fortawesome/free-solid-svg-icons';
 import ApiClient from '../../../services/api-client';
@@ -33,6 +33,7 @@ const MovieGrid = ({ movies, apiClient, isLoading, hasNextPage, isError, error, 
     const [open, setOpen] = useState(false);
     const [movieModalInfo, setMovieModalInfo] = useState({ overview: '', videoLink: '', title: '', releaseDate: '' });
     const [scrollPos, setScrollPos] = useState(0);
+    const styledRef = useRef<HTMLButtonElement>(null);
 
     const handleOpen = async (movieModalInfo: MovieModalInfoType) => {
         // fetch available videos from api
@@ -50,6 +51,7 @@ const MovieGrid = ({ movies, apiClient, isLoading, hasNextPage, isError, error, 
         // open the modal once weve acquired movie information
         setOpen(true);
     }
+
     const handleClose = () => setOpen(false);
     const scrollToTop = () => window.scrollTo(0, 0);
     // handles infinite scroll
@@ -91,7 +93,8 @@ const MovieGrid = ({ movies, apiClient, isLoading, hasNextPage, isError, error, 
                 />)
             }
             )}
-            {scrollPos > 300 ? <BackToTopBtn onClick={scrollToTop}><FontAwesomeIcon icon={faAnglesUp} /></BackToTopBtn> : null}
+            {<BackToTopBtn onClick={scrollToTop} 
+            visibility={scrollPos > 300}  ref={styledRef}><FontAwesomeIcon icon={faAnglesUp} /></BackToTopBtn>}
             {isLoading && <LoadingHeader>Loading more movies!</LoadingHeader>}
             {isError && <ErrorHeader>{error.message}</ErrorHeader>}
             <Modal
