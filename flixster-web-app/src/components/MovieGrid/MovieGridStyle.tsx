@@ -99,7 +99,7 @@ export const LoadingHeader = styled.p`
 export const ErrorHeader = styled.h2`
 `;
 
-const scrollBtnAnimation = keyframes`
+const openingBtnAnimation = keyframes`
     0% {
         bottom: 50px;
         opacity:.5;
@@ -110,7 +110,22 @@ const scrollBtnAnimation = keyframes`
     }
 `;
 
-export const BackToTopBtn = styled.button`
+const closingBtnAnimation = keyframes`
+    0% {
+        bottom: 20px;
+        opacity: 1;
+    }
+    100% {
+        bottom: 50px;
+        opacity: .5;
+    }
+`;
+type BackToTopBtnProps = {
+    animationType: string;
+    visibility: boolean;
+};
+
+export const BackToTopBtn = styled.button<BackToTopBtnProps>`
     position: fixed;
     z-index: 3;
     bottom: 20px;
@@ -129,6 +144,21 @@ export const BackToTopBtn = styled.button`
         background-color: #333;
         color: #fff;
     }
-    animation:${scrollBtnAnimation} 1s ease-in-out;
+    animation:${props => {
+        if (props.animationType === "appear")
+            return openingBtnAnimation;
+        if (props.animationType === 'exit')
+            return closingBtnAnimation;
+    }} 1s ease-in-out;
+    display: ${props => {
+        if (props.visibility)
+            return "block";
+        else {
+            setTimeout(function () {
+                return "none";
+            }, 500);
+        }
+    }};
+
 `;
 
