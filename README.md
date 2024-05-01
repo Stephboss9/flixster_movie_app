@@ -5,7 +5,7 @@
 
 ## 👷🏽‍♀️ Updates:
 
-### Newly Deployed Application! (deployed with Vercel):[New Flixster Web Application](https://flixster-web-m9gtgnw5m-stephanes-projects-022e3b78.vercel.app/)
+### Newly Deployed Application! (deployed with Vercel):[Link](https://flixster-web-app.vercel.app/) 
 Tech: React + TypeScript + Styled Components
 
 ### Previously Deployed Application: [Old Site](https://stephboss9.github.io/flixster_movie_app/)
