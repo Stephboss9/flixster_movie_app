@@ -27,7 +27,7 @@ type NavigationProps = {
     apiClient: ApiClient;
 }
 
-const Navigation = ({ setMovies, setPage, setMovieListCategory, setSearchQuery, apiClient }: NavigationProps) => {
+const Navigation = ({ setMovies, setPage, setMovieListCategory, setSearchQuery}: NavigationProps) => {
     const [isTyping, setIsTyping] = useState(false);
     const [userInput, setUserInput] = useState("");
 

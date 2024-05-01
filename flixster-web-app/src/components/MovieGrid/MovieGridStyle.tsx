@@ -110,16 +110,6 @@ const openingBtnAnimation = keyframes`
     }
 `;
 
-const closingBtnAnimation = keyframes`
-    0% {
-        bottom: 100px;
-        opacity: 1;
-    }
-    100% {
-        bottom: 150px;
-        opacity: .5;
-    }
-`;
 type BackToTopBtnProps = {
     visibility: boolean;
 };

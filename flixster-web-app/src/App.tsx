@@ -1,5 +1,5 @@
 import Navigation from './components/Navigation/Navigation';
-import { useState, useEffect } from 'react';
+import { useState} from 'react';
 import MovieGrid from './components/MovieGrid/MovieGrid';
 import { useMovies } from '../src/hooks/useMovies';
 import ApiClient from '../services/api-client';

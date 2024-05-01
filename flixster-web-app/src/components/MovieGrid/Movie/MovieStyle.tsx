@@ -1,6 +1,5 @@
 import { styled, keyframes } from "styled-components";
-import { Modal as BaseModal } from '@mui/base/Modal';
-import React, { forwardRef } from 'react';
+
 
 const revealAnimation = keyframes`
     0% {
@@ -67,5 +66,5 @@ export const ModalContent = styled.div`
         display: flex;
         flex-direction: column;
         justify-content:center;
-        `
+        `;
 

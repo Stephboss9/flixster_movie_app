@@ -1,6 +1,7 @@
 import React from "react";
 import { render, screen} from "@testing-library/react"
 import Navigation from "../components/Navigation/Navigation";
+import ApiClient from "../../services/api-client";
 
 describe ('Navigation Component', () => {
 
@@ -13,12 +14,15 @@ describe ('Navigation Component', () => {
      const setStateMock = vi.fn();
      const setMoviesMock = vi.fn();
      const setPageMock = vi.fn();
-
-     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     const setMovieListCategoryMock = vi.fn();
+     const setSearchQuery = vi.fn();
+     const api = new ApiClient();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
      const useStateMock: any = (useState: any) => [useState, setStateMock];
      vi.spyOn(React, 'useState').mockImplementationOnce(useStateMock);
      
-    render(<Navigation setMovies={setMoviesMock} page={1} setPage={setPageMock}/>);
+    render(<Navigation setMovies={setMoviesMock} page={1} setPage={setPageMock} setMovieListCategory={setMovieListCategoryMock}
+          setSearchQuery={setSearchQuery} apiClient={api}/>);
     
     // checks existence of title
     expect(screen.getByTestId('title')).toBeInTheDocument();
