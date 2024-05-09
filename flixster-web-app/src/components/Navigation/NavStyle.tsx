@@ -18,6 +18,7 @@ export const NavWrapper = styled.div`
 export const NavHeader = styled.div`
     display:flex;
     align-items:center;
+    justify-content:center;
     width:100%;
 `;
 
@@ -65,6 +66,15 @@ export const SearchInput = styled.input`
     height:50px;
     width:100%;
     padding:5px;
+    transition: border .5s ease-in;
+        &:hover {
+            border: 1px solid white;
+        }
+    @media (max-width: 769px) {
+        border: 1px solid #232323;
+        background: #232323;
+        
+    }
     `;
 
 export const SearchBox = styled.form`
@@ -72,6 +82,13 @@ export const SearchBox = styled.form`
     align-items:center;
     width:400px;
     flex:.4;
+    @media (max-width: 769px) {
+        position:absolute;
+        top:100px;    
+        padding: 0px 10px;  
+    }
+   
+    
 `;
 
 
