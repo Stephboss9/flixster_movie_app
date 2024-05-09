@@ -72,8 +72,7 @@ export const SearchInput = styled.input`
         }
     @media (max-width: 769px) {
         border: 1px solid #232323;
-        background: #232323;
-        
+        background: #171616;       
     }
     `;
 
