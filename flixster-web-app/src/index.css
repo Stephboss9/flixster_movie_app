@@ -80,7 +80,8 @@ button:focus-visible {
   --bs: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.25),
     /*box-shadow settings*/
     0.125em 0.125em 0.25em rgba(0, 0, 0, .15);
-  --background-color: #333;
+  /* --background-color: #333; */
+  --background-color: #232323;
   --nav-link-color: #e5e5e5;
   --nav-link-active: #fff;
   --movie-card-bs: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.25),
